@@ -1,0 +1,1498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Index</title>
+<meta name="description" content="Cross-team knowledge that keeps itself up to date.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/* Layout: sticky app bar with search and tools; content in a centered column below; site footer at the bottom.
+   Light only, by request. */
+:root {
+  color-scheme: light;
+  --paper: #F7F7F8;
+  --grid: rgba(120, 120, 135, .07);
+  --card: #FFFFFF;
+  --card-line: #E4E4E8;
+  --card-line-strong: #D4D4DA;
+  --tint: #FAFAFB;
+  --sheet: #FFFFFF;
+  --sheet-back: #F3F3F5;
+  --sheet-line: #C9C9D1;
+  --ink: #18181B;
+  --muted: #64646E;
+  --faint: #9D9DA7;
+  --hair: #EEEEF1;
+  --hover: #F1F1F4;
+  --accent: #232FD3;
+  --accent-hover: #1C26B4;
+  --accent-soft: #ECEDFD;
+  --working-bg: #DCE5FF; --working-fg: #232FD3;
+  --watching-bg: #EDEDF0; --watching-fg: #64646E;
+  --ok: #1E8656; --ok-soft: #E5F4EC;
+  --warn: #A3610A; --warn-soft: #FBF2E1;
+  --bad: #C2353A; --bad-soft: #FCEAEB;
+  --r: 10px; --r-sm: 6px;
+  --shadow: 0 1px 2px rgba(16, 16, 24, .04);
+  --shadow-lift: 0 12px 32px rgba(16, 16, 24, .10), 0 2px 6px rgba(16, 16, 24, .05);
+  --font-ui: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { min-height: 100%; }
+body {
+  margin: 0; background-color: var(--paper); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px; min-height: 100vh; display: flex; flex-direction: column;
+  color: var(--ink); font-family: var(--font-ui); font-size: 14px; line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+body.modal-open { overflow: hidden; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--font-mono); font-size: 11.5px; }
+
+.shell { flex: 1; width: 100%; max-width: 1280px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+
+/* App bar */
+.top { position: sticky; top: 0; z-index: 40; background: rgba(255, 255, 255, .9); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--card-line); }
+.top-in { max-width: 1280px; margin: 0 auto; min-height: 60px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); display: flex; align-items: center; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 9px; color: var(--ink); font-size: 17px; font-weight: 500; letter-spacing: -0.01em; background: none; border: 0; padding: 0; flex: none; }
+.brand img { width: 16px; height: 23px; }
+.searchrow { flex: 1; min-width: 0; display: flex; justify-content: center; gap: 8px; }
+.search { width: min(560px, 100%); height: 38px; display: flex; align-items: center; background: var(--tint); border: 1px solid var(--card-line); border-radius: 8px; transition: border-color .15s, box-shadow .15s, background .15s; }
+.search .glass { width: 17px; height: 17px; margin-left: 12px; flex: none; }
+.search input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; padding: 0 10px; font-size: 13.5px; }
+.search input::placeholder { color: var(--faint); }
+.search kbd { font-family: var(--font-mono); font-size: 11px; color: var(--faint); border: 1px solid var(--card-line); border-radius: 4px; padding: 1px 6px; margin-right: 10px; background: var(--card); }
+.search:focus-within { background: var(--card); border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.search:focus-within kbd { display: none; }
+.tools { display: flex; gap: 4px; flex: none; }
+.iconbtn { width: 38px; height: 38px; flex: none; display: grid; place-items: center; background: none; border: 0; border-radius: 8px; color: var(--muted); position: relative; }
+.iconbtn:hover, .iconbtn[aria-expanded="true"] { color: var(--ink); background: var(--hover); }
+.iconbtn svg { width: 19px; height: 19px; }
+.iconbtn.boxed { border: 1px solid var(--card-line); background: var(--tint); }
+.iconbtn.boxed:hover, .iconbtn.boxed[aria-expanded="true"] { background: var(--card); border-color: var(--card-line-strong); }
+.iconbtn.boxed svg { width: 17px; height: 17px; }
+.iconbtn .badge { position: absolute; top: 8px; right: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px #fff; }
+.iconbtn .count { position: absolute; top: 3px; right: 1px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; line-height: 17px; text-align: center; box-shadow: 0 0 0 2px #fff; }
+
+.pop { position: absolute; right: 0; top: calc(100% + 8px); z-index: 30; width: 268px; background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); box-shadow: var(--shadow-lift); padding: 14px; display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.pop h4 { margin: 0; font-size: 11px; font-weight: 500; color: var(--faint); letter-spacing: .07em; text-transform: uppercase; }
+.pop label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.pop input[type="checkbox"], .pop input[type="radio"], .settings input[type="checkbox"] { accent-color: var(--accent); }
+.pop .grp { display: flex; flex-direction: column; gap: 7px; }
+.popwrap { position: relative; }
+.menu { padding: 6px; gap: 0; width: 248px; }
+.menu .me-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px 12px; border-bottom: 1px solid var(--hair); margin-bottom: 4px; }
+.menu .me-row img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+.menu .me-row small { display: block; color: var(--muted); font-size: 12px; }
+.menu button { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: 0; border-radius: var(--r-sm); padding: 8px 10px; font-size: 13.5px; color: var(--ink); }
+.menu button:hover { background: var(--hover); }
+.menu button svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
+.menu button:hover svg { color: var(--ink); }
+.menu hr { border: 0; border-top: 1px solid var(--hair); margin: 4px 0; }
+
+/* Home */
+.home { display: flex; flex-direction: column; gap: 52px; }
+.home h2 { font-size: 15px; font-weight: 500; margin: 0 0 18px; display: flex; align-items: center; gap: 12px; }
+.home h2 small { font-size: 12.5px; color: var(--muted); font-weight: 400; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 34px 20px; padding-top: 11px; }
+
+.ws { position: relative; background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); box-shadow: var(--shadow); min-height: 290px; padding: 36px 18px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s; }
+.ws:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: var(--card-line-strong); }
+.status { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); padding: 6px 10px 5px; border-radius: 5px; font-size: 11.5px; font-weight: 500; letter-spacing: .08em; line-height: 1; white-space: nowrap; }
+.status.working { background: var(--working-bg); color: var(--working-fg); }
+.status.watching { background: var(--watching-bg); color: var(--watching-fg); }
+.ws h3 { margin: 0; font-size: 16.5px; font-weight: 500; text-wrap: balance; letter-spacing: -0.005em; }
+.faces { display: flex; justify-content: center; }
+.face { width: 28px; height: 28px; border-radius: 50%; margin-left: -7px; object-fit: cover; border: 2px solid var(--card); background: var(--sheet-back); display: block; flex: none; }
+.faces .face:first-child { margin-left: 0; }
+.faces.lg .face { width: 36px; height: 36px; margin-left: -9px; }
+.faces.lg .face:first-child { margin-left: 0; }
+.ws .meta { margin-top: auto; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+.ws .meta .alert { color: var(--warn); }
+.ws .meta .you { color: var(--accent); }
+.ws .empty { margin: auto 0; color: var(--faint); font-size: 14.5px; }
+
+/* Document stack: tight at rest, fans out on hover */
+.stack { position: relative; width: 100%; height: 142px; margin-top: 10px; }
+.sheet { position: absolute; top: 6px; left: 50%; width: 82px; height: 118px; margin-left: -41px; background: var(--sheet); border: 1px solid var(--sheet-line); border-radius: 3px; padding: 8px 7px; text-align: left; font-size: 9.5px; line-height: 1.3; overflow: hidden; color: var(--ink);
+  transform-origin: 50% 100%; transition: transform .32s cubic-bezier(.2,.8,.2,1), translate .2s, box-shadow .2s, border-color .2s, background .2s; box-shadow: 0 1px 3px rgba(16,16,24,.07); }
+.sheet b { display: block; font-size: 10.5px; font-weight: 500; margin-bottom: 3px; line-height: 1.2; }
+.sheet .k { display: block; font-family: var(--font-mono); font-size: 8px; color: var(--faint); text-transform: uppercase; margin-bottom: 3px; letter-spacing: .04em; }
+.sheet .t { color: var(--muted); }
+.sheet.behind { background: var(--sheet-back); border-color: var(--card-line-strong); }
+.sheet.behind .t, .sheet.behind b, .sheet.behind .k { opacity: 0; transition: opacity .2s; }
+.sheet.s1 { transform: rotate(-5deg) translateX(-14px); z-index: 1; }
+.sheet.s3 { transform: rotate(5deg) translateX(14px); z-index: 1; }
+.sheet.s2 { z-index: 3; }
+/* On hover the pages line up flat, side by side, all styled like the front page */
+.ws:hover .sheet { transform: none; background: var(--sheet); border-color: var(--sheet-line); }
+.ws:hover .sheet.s1 { transform: translateX(-88px); }
+.ws:hover .sheet.s3 { transform: translateX(88px); }
+.ws:hover .stack.n2 .sheet.s1 { transform: translateX(-44px); }
+.ws:hover .stack.n2 .sheet.s2 { transform: translateX(44px); }
+.ws:hover .sheet.behind .t, .ws:hover .sheet.behind b, .ws:hover .sheet.behind .k { opacity: 1; }
+.ws .sheet:hover { border-color: var(--accent); box-shadow: 0 8px 18px rgba(35,47,211,.16); z-index: 4; translate: 0 -6px; }
+.stack-hint { font-size: 11px; color: var(--faint); opacity: 0; transition: opacity .2s; margin-top: -2px; }
+.ws:hover .stack-hint { opacity: 1; }
+
+.ws.create { background: transparent; border: 1.5px dashed var(--card-line-strong); box-shadow: none; justify-content: center; color: var(--faint); font-size: 15px; gap: 14px; }
+.ws.create img { width: 36px; height: 36px; transition: transform .2s; }
+.ws.create:hover { color: var(--accent); border-color: var(--accent); background: var(--card); }
+.ws.create:hover img { transform: rotate(90deg); }
+
+/* Notifications panel */
+.pop.notif { width: min(400px, calc(100vw - 32px)); padding: 0; gap: 0; max-height: min(660px, calc(100vh - 84px)); overflow: hidden; right: -46px; }
+.notif-h { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--hair); }
+.notif-h h3 { margin: 0; font-size: 14px; font-weight: 500; flex: 1; }
+.notif-h span { color: var(--faint); font-size: 12px; }
+.pop.notif .inbox { overflow-y: auto; min-height: 0; flex: 1; }
+.inbox { display: flex; flex-direction: column; }
+.note { padding: 16px 18px; border-top: 1px solid var(--hair); display: flex; flex-direction: column; gap: 10px; }
+.note:first-child { border-top: 0; }
+.note .where { color: var(--faint); font-size: 12px; background: none; border: 0; padding: 0; text-align: left; align-self: flex-start; }
+.note .where:hover { color: var(--accent); }
+.note .who { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 14px; }
+.note .who .face { width: 26px; height: 26px; margin: 0; border: 0; }
+.note .who small { color: var(--faint); font-weight: 400; font-size: 12px; margin-left: auto; }
+.note .msg { margin: 0; font-size: 13.5px; line-height: 1.5; }
+.note .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.note textarea { width: 100%; min-height: 72px; border: 1px solid var(--card-line); border-radius: var(--r-sm); background: var(--tint); padding: 9px 10px; resize: vertical; font-size: 13.5px; }
+.note .done { color: var(--ok); font-size: 13px; }
+.idx { width: 26px; height: 26px; display: grid; place-items: center; background: var(--accent-soft); border-radius: 50%; flex: none; }
+.idx img { width: 12px; height: 17px; }
+
+.btn { border: 1px solid var(--card-line-strong); background: var(--card); border-radius: var(--r-sm); padding: 6px 12px; font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: var(--shadow); transition: background .12s, border-color .12s, color .12s; }
+.btn:hover { background: var(--hover); border-color: var(--card-line-strong); }
+.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+.btn.ghost { border-color: transparent; background: none; color: var(--muted); box-shadow: none; }
+.btn.ghost:hover { color: var(--ink); background: var(--hover); }
+
+.cite { display: inline-grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); font-size: 10.5px; font-weight: 500; vertical-align: 2px; margin-left: 2px; border: 0; }
+button.cite:hover { background: var(--accent); color: #fff; }
+.diff { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.diff del { background: var(--bad-soft); color: var(--bad); padding: 4px 7px; border-radius: 4px; }
+.diff ins { background: var(--ok-soft); color: var(--ok); padding: 4px 7px; border-radius: 4px; text-decoration: none; }
+
+/* Pages */
+.back { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; padding: 0; color: var(--muted); font-size: 13.5px; align-self: flex-start; }
+.back:hover { color: var(--accent); }
+.page { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 32px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.panel { background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+.panel > header { padding: 14px 18px; border-bottom: 1px solid var(--hair); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.panel > header h3 { margin: 0; font-size: 14px; font-weight: 500; }
+.panel > header span { color: var(--faint); font-size: 12px; }
+.panel .body { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+
+.q-head h1 { margin: 6px 0 0; font-size: 28px; font-weight: 500; letter-spacing: -0.015em; text-wrap: balance; }
+.q-head .scope { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; color: var(--muted); font-size: 13px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; border: 1px solid var(--card-line-strong); background: var(--card); }
+.pill button { border: 0; background: none; padding: 0; color: var(--faint); }
+.pill button:hover { color: var(--bad); }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--card-line-strong); flex-wrap: wrap; }
+.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 12px; color: var(--muted); font-size: 13.5px; margin-bottom: -1px; }
+.tabs button[aria-pressed="true"] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+.tabs button span { color: var(--faint); font-size: 12px; margin-left: 4px; }
+
+.answer .body p { margin: 0; font-size: 15.5px; line-height: 1.6; max-width: 70ch; }
+.trace { color: var(--muted); font-size: 12.5px; display: flex; flex-direction: column; gap: 5px; }
+.trace .line { display: flex; gap: 8px; align-items: baseline; }
+.trace .line i { font-style: normal; width: 14px; flex: none; color: var(--ok); }
+.trace .line.run i { color: var(--accent); }
+.trace .line.ask i { color: var(--warn); }
+.trace .line.skip { color: var(--bad); }
+.spin { display: inline-block; width: 10px; height: 10px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+details.how summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+details.how summary:hover { color: var(--accent); }
+details.how[open] summary { margin-bottom: 8px; }
+.askbox { background: var(--warn-soft); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.askbox p { margin: 0; }
+.askbox textarea { width: 100%; min-height: 60px; border: 1px solid var(--card-line-strong); border-radius: var(--r-sm); background: var(--card); padding: 8px 10px; }
+.conf { font-size: 11.5px; padding: 2px 8px; font-weight: 500; background: var(--ok-soft); color: var(--ok); }
+.conf.mid { background: var(--warn-soft); color: var(--warn); }
+.repair { border: 1px solid var(--hair); border-radius: 8px; background: var(--tint); padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.repair strong { font-weight: 500; }
+
+.results { display: flex; flex-direction: column; }
+.result { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 14px; padding: 16px 18px; border-top: 1px solid var(--hair); align-items: start; }
+.result:first-child { border-top: 0; }
+.result:hover { background: var(--tint); }
+.ftype { width: 34px; height: 42px; border: 1px solid var(--sheet-line); background: var(--sheet); display: grid; place-items: end center; padding-bottom: 4px; font-family: var(--font-mono); font-size: 8.5px; text-transform: uppercase; }
+.ftype.t-pdf { border-color: var(--bad); color: var(--bad); }
+.ftype.t-doc { border-color: var(--accent); color: var(--accent); }
+.ftype.t-slack { border-color: var(--muted); color: var(--muted); }
+.ftype.t-csv { border-color: var(--ok); color: var(--ok); }
+.ftype.t-fig { border-color: var(--warn); color: var(--warn); }
+.result .t { font-size: 15px; font-weight: 500; color: var(--accent); background: none; border: 0; padding: 0; text-align: left; }
+.result .t:hover { text-decoration: underline; text-underline-offset: 3px; }
+.result .p { color: var(--faint); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.result .snip { margin: 6px 0 0; color: var(--ink); font-size: 13.5px; max-width: 72ch; }
+.result .snip mark { background: #FFF1A8; color: inherit; padding: 0 1px; }
+.result .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; align-items: center; font-size: 12px; color: var(--muted); }
+.result .tags .face { width: 18px; height: 18px; border: 0; margin: 0; }
+.result .when { color: var(--faint); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.wtag { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px 2px; border-radius: 4px; font-size: 10.5px; letter-spacing: .07em; font-weight: 500; border: 0; text-transform: uppercase; }
+.wtag.working { background: var(--working-bg); color: var(--working-fg); }
+.wtag.watching { background: var(--watching-bg); color: var(--watching-fg); }
+.wtag.none, .status.none { background: var(--card); color: var(--faint); box-shadow: inset 0 0 0 1px var(--card-line-strong); }
+
+/* Overlaps: a horizontal carousel of compact cards */
+.car-nav { margin-left: auto; display: flex; gap: 6px; }
+.car-nav button { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--card-line-strong); border-radius: var(--r-sm); background: var(--card); color: var(--muted); font-size: 14px; box-shadow: var(--shadow); }
+.car-nav button:hover:not(:disabled) { color: var(--ink); background: var(--hover); }
+.car-nav button:disabled { opacity: .4; cursor: default; }
+.ovs { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth; padding: 2px 2px 12px; margin: -2px -2px 0; scrollbar-width: thin; scrollbar-color: var(--card-line-strong) transparent; }
+.ov { flex: 0 0 min(372px, 86%); scroll-snap-align: start; background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); box-shadow: var(--shadow); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+.ov.done { box-shadow: var(--shadow); justify-content: center; align-items: flex-start; color: var(--muted); font-size: 13.5px; }
+.ov .ok { color: var(--ok); }
+.ov-top { display: flex; gap: 8px; align-items: center; }
+.ov-top .when { font-family: var(--font-mono); font-size: 11px; color: var(--warn); background: var(--warn-soft); padding: 3px 7px 2px; border-radius: 4px; }
+.ov-top .faces { margin-left: auto; }
+.ov-top .face { width: 22px; height: 22px; margin-left: -6px; }
+.ov h3 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.3; letter-spacing: -0.005em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ov-sum { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.ov-pair { display: flex; flex-direction: column; border: 1px solid var(--hair); border-radius: 8px; background: var(--tint); }
+.ov-side { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 8px; align-items: center; background: none; border: 0; padding: 8px 10px; text-align: left; border-radius: 8px; }
+.ov-side + .ov-side { border-top: 1px solid var(--hair); border-radius: 0 0 8px 8px; }
+.ov-side:hover { background: var(--hover); }
+.ov-side b { font-weight: 500; font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ov-file { grid-column: 2; font-size: 12px; color: var(--accent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ov-decide { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; background: var(--accent-soft); padding: 8px 10px; border-radius: 8px; }
+.ov-decide .idx { background: var(--card); width: 20px; height: 20px; }
+.ov-decide .idx img { width: 8px; height: 12px; }
+.ov-foot { display: flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 2px; }
+.ov-foot .btn { padding: 5px 10px; font-size: 12.5px; }
+.ov-done-note { color: var(--muted); font-size: 12.5px; margin: 6px 0 0; }
+.sec-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.sec-h h3 { margin: 0; font-size: 15px; font-weight: 500; }
+.sec-h span { color: var(--faint); font-size: 12px; }
+
+/* Teams working near you */
+.nears { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.near { background: var(--card); border: 1px dashed var(--card-line-strong); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.near:hover { border-color: var(--accent); box-shadow: var(--shadow-lift); }
+.near-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.near-to { font-size: 11.5px; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 999px; }
+.near h3 { margin: 0; font-size: 15px; font-weight: 500; }
+.near p { margin: 0; font-size: 13px; color: var(--muted); flex: 1; }
+.near-foot { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: 4px; }
+.near-foot .alert { color: var(--warn); }
+.wslink { background: none; border: 0; padding: 0; color: var(--muted); font-size: 12px; }
+.wslink:hover { color: var(--accent); }
+.tag { font-size: 11.5px; padding: 2px 8px; font-weight: 500; border-radius: 999px; }
+.tag.stale { background: var(--warn-soft); color: var(--warn); }
+.tag.fixed { background: var(--ok-soft); color: var(--ok); }
+.tag.key { background: var(--accent-soft); color: var(--accent); }
+.nores { padding: 28px 18px; color: var(--muted); text-align: center; }
+
+.mini { display: flex; flex-direction: column; }
+.mini button { display: flex; align-items: center; gap: 12px; text-align: left; background: none; border: 0; border-top: 1px solid var(--hair); padding: 12px 18px; width: 100%; }
+.mini button:first-child { border-top: 0; }
+.mini button:hover { background: var(--tint); }
+.mini .nm { font-weight: 500; display: block; }
+.mini .sub { color: var(--muted); font-size: 12px; display: block; }
+.mini .face { width: 30px; height: 30px; margin: 0; border: 0; }
+
+/* Workstream page */
+.ws-head { display: flex; flex-direction: column; gap: 12px; }
+.ws-head .status { position: static; transform: none; align-self: flex-start; }
+.ws-head h1 { margin: 0; font-size: 32px; font-weight: 500; letter-spacing: -0.015em; }
+.ws-head p { margin: 0; color: var(--muted); max-width: 64ch; font-size: 15px; }
+.ws-head .acts { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+.refs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 22px 20px 24px; }
+.ref { background: var(--sheet); border: 1px solid var(--card-line-strong); border-radius: 8px; padding: 14px 14px 12px; min-height: 210px; display: flex; flex-direction: column; gap: 7px; box-shadow: 0 1px 3px rgba(16,16,24,.06); text-align: left; transition: transform .2s, border-color .2s; }
+.ref:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.ref .k { font-family: var(--font-mono); font-size: 10px; color: var(--faint); text-transform: uppercase; }
+.ref b { font-size: 15px; font-weight: 500; }
+.ref p { margin: 0; font-size: 12.5px; color: var(--muted); flex: 1; }
+.ref .by { font-size: 11.5px; color: var(--faint); display: flex; align-items: center; gap: 6px; }
+.ref .by .face { width: 16px; height: 16px; margin: 0; border: 0; }
+.team .grp { padding: 14px 18px; border-top: 1px solid var(--hair); display: flex; flex-direction: column; gap: 10px; }
+.team .grp:first-child { border-top: 0; }
+.team h4 { margin: 0; font-size: 11px; color: var(--faint); font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+.member { display: flex; align-items: center; gap: 10px; }
+.member .face { width: 32px; height: 32px; margin: 0; border: 0; }
+.member .face.dim { filter: grayscale(1); opacity: .7; }
+.member small { display: block; color: var(--muted); font-size: 12px; }
+.feed .it { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; padding: 11px 18px; border-top: 1px solid var(--hair); font-size: 13px; }
+.feed .it:first-child { border-top: 0; }
+.feed .it .face, .feed .it .idx { width: 22px; height: 22px; margin: 0; border: 0; }
+.feed .it .idx img { width: 9px; height: 13px; }
+.feed .it small { display: block; color: var(--faint); font-size: 11.5px; }
+.wsask { display: flex; gap: 8px; padding: 14px 18px; }
+.wsask input { flex: 1; min-width: 0; border: 1px solid var(--card-line-strong); border-radius: var(--r-sm); padding: 8px 10px; background: var(--tint); }
+
+/* File viewer */
+.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(16, 16, 24, .32); display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding-block: calc(40px + env(safe-area-inset-top, 0px)) 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); animation: fade .15s ease-out; }
+@keyframes fade { from { opacity: 0; } }
+.doc { width: min(720px, 100%); background: var(--sheet); border: 1px solid var(--card-line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lift); animation: up .22s cubic-bezier(.2,.8,.2,1); }
+@keyframes up { from { transform: translateY(12px); opacity: .5; } }
+.doc-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--hair); background: var(--tint); }
+.doc-bar .mono { color: var(--faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+.doc-bar .x { width: 30px; height: 30px; border: 0; background: none; font-size: 18px; color: var(--muted); flex: none; }
+.doc-bar .x:hover { color: var(--accent); }
+.doc-main { padding: 34px 44px 40px; display: flex; flex-direction: column; gap: 16px; }
+.doc-main .k { font-family: var(--font-mono); font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em; }
+.doc-main h2 { margin: -6px 0 0; font-size: 28px; font-weight: 500; letter-spacing: -0.015em; text-wrap: balance; }
+.doc-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+.doc-meta .face { width: 22px; height: 22px; border: 0; margin: 0; }
+.doc-main h3 { margin: 10px 0 0; font-size: 15px; font-weight: 500; }
+.doc-main p { margin: 0; font-size: 15px; line-height: 1.65; max-width: 64ch; }
+.doc-main .hl { background: var(--ok-soft); }
+.doc-main .stale-p { background: var(--warn-soft); }
+.doc-foot { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 16px; border-top: 1px solid var(--hair); background: var(--tint); }
+
+/* Settings */
+.settings { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 36px; align-items: start; }
+.snav { display: flex; flex-direction: column; gap: 2px; position: sticky; top: 84px; }
+.snav button { text-align: left; background: none; border: 0; border-radius: var(--r-sm); padding: 7px 10px; color: var(--muted); font-size: 13.5px; }
+.snav button:hover { color: var(--ink); background: var(--hover); }
+.snav button[aria-current="true"] { color: var(--ink); background: var(--hover); font-weight: 500; }
+.srow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 18px; border-top: 1px solid var(--hair); }
+.srow:first-child { border-top: 0; }
+.srow b { font-weight: 500; display: block; }
+.srow small, .srow .mono { color: var(--muted); display: block; font-size: 12px; }
+.srow .mono { color: var(--faint); font-size: 11.5px; }
+.seg { display: inline-flex; border: 1px solid var(--card-line-strong); border-radius: var(--r-sm); overflow: hidden; }
+.seg button { border: 0; background: var(--card); padding: 6px 11px; font-size: 12.5px; color: var(--muted); border-left: 1px solid var(--card-line-strong); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.seg button[aria-pressed="true"][data-v="block"] { background: var(--bad-soft); color: var(--bad); }
+.switch { position: relative; width: 36px; height: 20px; border-radius: 999px; background: var(--card-line-strong); border: 0; padding: 0; transition: background .15s; }
+.switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.switch[aria-checked="true"] { background: var(--accent); }
+.switch[aria-checked="true"]::after { transform: translateX(16px); }
+.profile { display: flex; gap: 16px; align-items: center; padding: 18px; }
+.profile img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.profile b { font-size: 17px; font-weight: 500; display: block; }
+.profile small { color: var(--muted); }
+.field { border: 1px solid var(--card-line-strong); border-radius: var(--r-sm); padding: 6px 9px; background: var(--card); font-size: 13px; }
+
+/* Login: product visual on the left, sign-in on the right */
+body.auth .top { display: none; }
+.login { min-height: calc(100vh - 150px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: stretch; }
+.login-hero { background: linear-gradient(165deg, #E9EBFD 0%, #F3F3F8 55%, #F7F7F8 100%); border: 1px solid var(--card-line); border-radius: 16px; padding: 36px 40px 0; display: flex; flex-direction: column; overflow: hidden; }
+.login-hero .brand { cursor: default; margin-bottom: 36px; }
+.login-hero h1 { font-size: 40px; line-height: 1.06; letter-spacing: -0.03em; font-weight: 500; margin: 0 0 14px; text-wrap: balance; max-width: 15em; }
+.login-hero h1 em { font-style: normal; color: var(--accent); }
+.login-hero .lede { font-size: 16px; color: var(--muted); margin: 0; max-width: 30em; line-height: 1.5; }
+.login-side { display: flex; align-items: center; justify-content: center; padding: 24px 0; }
+.login-card { width: min(380px, 100%); }
+.login-card h2 { margin: 0 0 6px; font-size: 22px; font-weight: 500; letter-spacing: -0.015em; }
+.login-card .sub { margin: 0 0 26px; color: var(--muted); }
+.auth-box { display: flex; flex-direction: column; gap: 10px; }
+.auth-box .btn { padding: 10px 16px; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.auth-box .btn svg { width: 17px; height: 17px; }
+.auth-box .or { display: flex; align-items: center; gap: 12px; color: var(--faint); font-size: 12px; margin: 8px 0; }
+.auth-box .or::before, .auth-box .or::after { content: ""; flex: 1; height: 1px; background: var(--card-line); }
+.auth-box label { font-size: 13px; font-weight: 500; }
+.auth-box input { border: 1px solid var(--card-line-strong); border-radius: var(--r-sm); background: var(--card); padding: 10px 12px; font-size: 14px; outline: 0; }
+.auth-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.auth-fine { color: var(--faint); font-size: 12px; margin-top: 22px; line-height: 1.5; }
+.auth-fine a, .auth-alt a { color: var(--muted); }
+.auth-alt { color: var(--muted); font-size: 13px; margin-top: 18px; }
+.auth-err { color: var(--bad); font-size: 12.5px; }
+.login-art { position: relative; flex: 1; min-height: 360px; margin-top: 28px; }
+.login-art .la-doc { position: absolute; width: 230px; background: var(--sheet); border: 1px solid var(--card-line-strong); border-radius: 8px; padding: 16px 16px 18px; box-shadow: var(--shadow-lift); }
+.login-art .la-doc .k { font-family: var(--font-mono); font-size: 10px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em; }
+.login-art .la-doc b { display: block; font-weight: 500; font-size: 15px; margin: 6px 0 10px; }
+.login-art .la-doc i { display: block; height: 6px; border-radius: 3px; background: var(--hair); margin-top: 7px; }
+.login-art .la-doc i.hl { background: var(--warn-soft); box-shadow: inset 0 0 0 1px #EBD3A6; }
+.login-art .la-a { left: 2%; top: 40px; transform: rotate(-3deg); }
+.login-art .la-b { right: 4%; top: 120px; transform: rotate(2.5deg); }
+.login-art .la-team { position: absolute; display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+.login-art .la-ta { left: 4%; top: 6px; } .login-art .la-tb { right: 6%; top: 86px; }
+.login-art .la-flag { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); width: min(380px, 92%); background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); box-shadow: var(--shadow-lift); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+.login-art .la-flag b { font-weight: 500; display: block; margin-bottom: 3px; }
+.login-art .la-flag small { color: var(--muted); font-size: 13px; line-height: 1.45; display: block; }
+.login-art svg.la-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* Help */
+.help { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 36px; align-items: start; }
+.help-hero h1 { margin: 0 0 8px; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+.help-hero p { margin: 0; color: var(--muted); font-size: 15px; max-width: 62ch; }
+.help section { scroll-margin-top: 84px; }
+.help h2 { font-size: 15px; font-weight: 500; margin: 0 0 12px; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.step { background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow); }
+.step .n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+.step b { display: block; font-weight: 500; margin-bottom: 4px; }
+.step p { margin: 0; color: var(--muted); font-size: 13px; }
+.feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.feat { background: var(--card); border: 1px solid var(--card-line); border-radius: var(--r); padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 84px; }
+.feat .ic { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+.feat .ic svg { width: 17px; height: 17px; }
+.feat h3 { margin: 4px 0 0; font-size: 14.5px; font-weight: 500; }
+.feat p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; flex: 1; }
+.feat .btn { align-self: flex-start; margin-top: 4px; }
+.faq details { border-top: 1px solid var(--hair); padding: 14px 18px; }
+.faq details:first-child { border-top: 0; }
+.faq summary { cursor: pointer; font-weight: 500; }
+.faq details p { margin: 8px 0 0; color: var(--muted); font-size: 13.5px; max-width: 70ch; }
+.help-contact { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px; flex-wrap: wrap; }
+.help-contact p { margin: 0; color: var(--muted); }
+
+/* Site footer */
+.site-foot { border-top: 1px solid var(--card-line); background: var(--card); }
+.site-foot .in { max-width: 1280px; margin: 0 auto; padding: 18px max(24px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap; color: var(--faint); font-size: 12.5px; }
+.site-foot nav { display: flex; gap: 6px 20px; flex-wrap: wrap; margin-left: auto; }
+.site-foot a { color: var(--muted); text-decoration: none; }
+.site-foot a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Create or join flow */
+.flow { width: min(620px, 100%); background: var(--card); border: 1px solid var(--card-line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lift); animation: up .22s cubic-bezier(.2,.8,.2,1); }
+.flow-bar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--hair); }
+.flow-bar h2 { margin: 0; font-size: 16px; font-weight: 500; flex: 1; }
+.flow-bar .x { width: 30px; height: 30px; border: 0; background: none; font-size: 18px; color: var(--muted); }
+.flow-bar .x:hover { color: var(--accent); }
+.flow-tabs { display: flex; gap: 2px; padding: 0 18px; border-bottom: 1px solid var(--hair); }
+.flow-tabs button { background: none; border: 0; padding: 12px 10px 11px; color: var(--muted); font-size: 13.5px; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.flow-tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+.flow-main { padding: 20px 18px; display: flex; flex-direction: column; gap: 18px; }
+.flow-main label.lbl { display: flex; flex-direction: column; gap: 7px; font-size: 13px; font-weight: 500; }
+.flow-main label.lbl small { color: var(--muted); font-weight: 400; }
+.flow-main input[type="text"], .flow-main input[type="search"], .flow-main textarea { border: 1px solid var(--card-line-strong); background: var(--card); padding: 10px 12px; font-size: 14px; font-weight: 400; border-radius: var(--r-sm); outline: 0; width: 100%; }
+.flow-main textarea { min-height: 70px; resize: vertical; }
+.flow-main input:focus, .flow-main textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.flow-main .grp h4 { margin: 0 0 8px; font-size: 13px; font-weight: 500; }
+.flow-main .grp h4 small { color: var(--muted); font-weight: 400; margin-left: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--card-line-strong); border-radius: 999px; background: var(--card); padding: 4px 11px 4px 4px; font-size: 13px; }
+.chip .face { width: 22px; height: 22px; margin: 0; border: 0; }
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.chip.src { padding: 6px 11px; }
+.chip.src[disabled] { color: var(--faint); border-style: dashed; cursor: not-allowed; }
+.jrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--hair); }
+.jrow:first-child { border-top: 0; padding-top: 0; }
+.jrow h3 { margin: 0 0 4px; font-size: 14.5px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.jrow p { margin: 0 0 8px; color: var(--muted); font-size: 13px; }
+.jrow .faces { justify-content: flex-start; }
+.jrow .face { width: 22px; height: 22px; margin-left: -5px; }
+.jrow .acts { display: flex; gap: 6px; }
+.flow-foot { display: flex; gap: 8px; justify-content: flex-end; padding: 14px 18px; border-top: 1px solid var(--hair); background: var(--tint); }
+.flow .trace .line { font-size: 13.5px; }
+
+.toast { position: fixed; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; border-radius: 8px; box-shadow: var(--shadow-lift); padding: 10px 16px; font-size: 13px; z-index: 60; }
+
+@media (max-width: 1100px) {
+  .nears { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home, .page { grid-template-columns: minmax(0, 1fr); }
+  .side { position: static; }
+}
+@media (max-width: 900px) {
+  .login { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .login-hero { padding-bottom: 32px; }
+  .login-art { display: none; }
+  .help { grid-template-columns: minmax(0, 1fr); }
+  .help .snav { position: static; flex-direction: row; flex-wrap: wrap; }
+  .steps, .feats { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .top-in { flex-wrap: wrap; gap: 10px 12px; padding-block: 10px; }
+  .tools { margin-left: auto; }
+  .searchrow { order: 3; flex-basis: 100%; }
+  .search { width: auto; flex: 1; }
+  .search kbd { display: none; }
+  .shell { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-top: 24px; }
+  .login-hero { padding: 28px 22px; }
+  .site-foot nav { margin-left: 0; }
+  .refs, .nears { grid-template-columns: minmax(0, 1fr); }
+  .result { grid-template-columns: 34px minmax(0, 1fr); }
+  .result .when { display: none; }
+  .ws-head h1 { font-size: 25px; }
+  .settings { grid-template-columns: minmax(0, 1fr); }
+  .snav { position: static; flex-direction: row; flex-wrap: wrap; }
+  .doc-main { padding: 24px 20px 28px; }
+  .srow { grid-template-columns: minmax(0, 1fr); }
+  .login-hero h1 { font-size: 30px; }
+  .jrow { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <button class="brand" id="homeBtn" type="button" aria-label="Index home"><img src="icons/logo.svg" alt="">Index</button>
+    <form class="searchrow" id="searchForm" role="search">
+      <label class="search"><img class="glass" src="icons/search.svg" alt=""><input id="q" type="search" autocomplete="off" placeholder="Search files, ask a question, or find a workstream" aria-label="Search"><kbd>/</kbd></label>
+      <div class="popwrap">
+        <button class="iconbtn boxed" id="filterBtn" type="button" aria-label="Search filters" title="Search filters" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V20l-4-2v-5.5z"/></svg>
+          <span class="badge" id="filterBadge" hidden></span>
+        </button>
+        <div class="pop" id="filterPop" hidden></div>
+      </div>
+    </form>
+    <div class="tools">
+      <div class="popwrap">
+        <button class="iconbtn" id="notifBtn" type="button" aria-label="Notifications" title="Notifications" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+          <span class="count" id="notifCount" hidden></span>
+        </button>
+        <div class="pop notif" id="notifPop" hidden role="dialog" aria-label="Notifications"></div>
+      </div>
+      <div class="popwrap">
+        <button class="iconbtn" id="settingsBtn" type="button" aria-label="Settings" title="Settings" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+        <div class="pop menu" id="settingsPop" hidden></div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="shell">
+  <main id="view"></main>
+</div>
+<footer class="site-foot">
+  <div class="in">
+    <span>© 2026 Index Labs, Inc. All rights reserved.</span>
+    <nav aria-label="Legal">
+      <a href="/privacy" data-dead>Privacy Policy</a>
+      <a href="/terms" data-dead>Terms of Service</a>
+      <a href="/security" data-dead>Security</a>
+      <a href="https://status.index.app" data-dead>Status</a>
+      <a href="/help" data-help>Help center</a>
+      <a href="mailto:support@index.app" data-dead>Contact</a>
+    </nav>
+  </div>
+</footer>
+<div id="modal"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const TODAY = new Date('2026-10-31');
+const ago = n => { const d = new Date(TODAY); d.setDate(d.getDate() - n); return d; };
+
+const PEOPLE = {
+  me:     { name: 'You', role: 'Product manager' },
+  alice:  { name: 'Alice Wang', role: 'PM, Platform' },
+  david:  { name: 'David Chen', role: 'Eng lead, Platform' },
+  priya:  { name: 'Priya Natarajan', role: 'Backend engineer' },
+  marcus: { name: 'Marcus Hill', role: 'Legal counsel' },
+  sam:    { name: 'Sam Ito', role: 'Support lead' },
+  leo:    { name: 'Leo Brandt', role: 'Product designer' },
+  jen:    { name: 'Jen Walsh', role: 'Growth engineer' },
+  nora:   { name: 'Nora Diaz', role: 'Data scientist' },
+  bob:    { name: 'Bob Okafor', role: 'Browser engineer' },
+  mina:   { name: 'Mina Park', role: 'Eng lead, Tabs' },
+  tom:    { name: 'Tom Reyes', role: 'Engineer' },
+  rae:    { name: 'Rae Singh', role: 'Engineer' },
+};
+const first = id => PEOPLE[id].name.split(' ')[0];
+
+const WS = [
+  { id: 'perm', name: 'Update permissions', status: 'working', desc: 'Move the public API from per-key scopes to four roles, enforced at the gateway.', team: ['alice','david','priya','me'], watch: ['marcus','sam'] },
+  { id: 'growth', name: 'Run growth experiment', status: 'working', desc: 'A/B test a three-step onboarding checklist against the current empty state.', team: ['jen','leo','nora','me'], watch: ['alice'] },
+  { id: 'incog', name: 'Adding incognito mode', status: 'working', desc: 'Private windows that save nothing and never contact sync servers.', team: ['david','bob','me'], watch: ['marcus','sam','alice'] },
+  { id: 'tabs', name: 'Fixing tabs', status: 'watching', desc: 'Memory-aware tab discarding so 8 GB laptops stop swapping.', team: ['mina','tom','rae'], watch: ['me','leo'] },
+  { id: 'sync', name: 'Sync v2', status: 'watching', desc: 'New sync protocol rolling out to everyone by December 8.', team: ['priya','jen'], watch: ['me','david','tom'] },
+  { id: 'billing', name: 'Billing migration', status: 'watching', desc: 'Move invoices from the legacy system to the new billing service.', team: ['tom','nora'], watch: ['me'] },
+];
+const wsBy = Object.fromEntries(WS.map(w => [w.id, w]));
+
+// `body` is the rest of the document, shown in the file viewer as [heading, paragraph] pairs.
+const FILES = [
+  { id: 'p1', ws: 'perm', kind: 'PRD', type: 'pdf', title: 'Permissions API PRD', path: '~/Documents/Specs/platform/', owner: 'alice', at: ago(14), key: 1, pinBy: 'alice',
+    text: 'Replace per-key scopes with four roles: Owner, Admin, Developer and Read-only. API keys inherit the role of the person who created them.',
+    body: [['Problem', 'Teams manage up to 142 scopes per key. Support sees about 60 tickets a month from people who granted the wrong scope.'], ['Goals', 'Cut permission tickets by half. Let admins audit access in one screen. Keep existing keys working through a 90-day migration.'], ['Out of scope', 'Custom roles. Per-resource permissions. These are candidates for R2.']] },
+  { id: 'p4', ws: 'perm', kind: 'Notes', type: 'doc', title: 'Architecture review notes, Oct 23', path: 'Drive / Platform / Reviews', owner: 'priya', at: ago(8), key: 2, pinBy: 'david',
+    text: 'Decision: enforce roles at the API gateway with a 60-second role cache. Services keep a fallback check for admin-only endpoints.',
+    body: [['Attendees', 'Alice Wang, David Chen, Priya Natarajan, Marcus Hill.'], ['Options discussed', 'Gateway enforcement (Option A) versus a check inside every service (Option B). Option B was rejected because 14 services would each need a release.'], ['Follow-ups', 'David updates RFC-041. Priya writes the migration script. Alice tells Support before the Nov 18 rollout.']] },
+  { id: 'p2', ws: 'perm', kind: 'RFC', type: 'md', title: 'RFC-041: Permission checks at the gateway', path: '~/code/platform/rfcs/', owner: 'david', at: ago(19), key: 3, pinBy: 'david', stale: true,
+    text: 'Status: Proposed. Option A checks roles in the API gateway. Option B checks roles in each service. A decision is pending the architecture review.',
+    body: [['Option A: gateway', 'One check per request at the edge. Adds about 2 ms at p50. Roles are cached for 60 seconds.'], ['Option B: per service', 'Each service checks roles itself. More precise, but 14 services need changes and releases.']] },
+  { id: 'p3', ws: 'perm', kind: 'Thread', type: 'slack', title: '#platform-api, Oct 24', path: 'Slack / #platform-api', owner: 'priya', at: ago(7),
+    text: 'going with gateway checks. david will update the rfc, I am starting the migration script today.',
+    body: [['David Chen', 'sounds good. I will get to the rfc this week.'], ['Alice Wang', 'I will loop in support before the Nov 18 rollout.']] },
+  { id: 'p5', ws: 'perm', kind: 'Sheet', type: 'csv', title: 'Scope-to-role mapping.csv', path: 'Drive / Platform', owner: 'alice', at: ago(5),
+    text: '142 existing scopes map to 4 roles. 9 scopes have no clear role and need an owner decision.' },
+
+  { id: 'g1', ws: 'growth', kind: 'Brief', type: 'doc', title: 'Onboarding checklist experiment brief', path: 'Drive / Growth', owner: 'jen', at: ago(21), key: 1, pinBy: 'jen',
+    text: 'Hypothesis: a three-step checklist raises week-1 activation from 31% to 36%. 50/50 split for four weeks.',
+    body: [['Metric', 'Activation means running a first search within 7 days of signing up.'], ['Audience', 'New workspaces created on web, excluding enterprise trials.'], ['Stopping rule', 'Not decided yet.']] },
+  { id: 'g2', ws: 'growth', kind: 'Design', type: 'fig', title: 'Checklist designs', path: '~/Desktop/', owner: 'leo', at: ago(16), key: 2, pinBy: 'leo',
+    text: 'Three steps: connect a source, invite a teammate, run a first search. Dismissible after step one.' },
+  { id: 'g3', ws: 'growth', kind: 'Data', type: 'csv', title: 'Activation dashboard export', path: 'Drive / Growth / Data', owner: 'nora', at: ago(2), key: 3, pinBy: 'nora',
+    text: 'Week 2: control 30.8% activated, checklist 34.1% activated (n = 11,420).' },
+
+  { id: 'i1', ws: 'incog', kind: 'PRD', type: 'pdf', title: 'Incognito PRD v3', path: '~/Documents/Specs/incognito/', owner: 'alice', at: ago(31), key: 1, pinBy: 'david', stale: true,
+    text: 'History sync in incognito is on by default and end-to-end encrypted so people can resume private sessions on other devices.',
+    body: [['Goals', 'Nothing a person does in a private window is saved on the device after the window closes.'], ['Open questions', 'Do downloads stay after the window closes? Current answer: yes, with a banner.']] },
+  { id: 'i2', ws: 'incog', kind: 'Notes', type: 'md', title: 'Privacy review notes', path: '~/Documents/Specs/incognito/', owner: 'marcus', at: ago(10), key: 2, pinBy: 'marcus',
+    text: 'Encrypted sync still exposes visit timing and device count to our servers. Recommend no server contact from private windows.' },
+  { id: 'i3', ws: 'incog', kind: 'Thread', type: 'slack', title: '#incognito, Oct 22', path: 'Slack / #incognito', owner: 'david', at: ago(9),
+    text: 'ok we are cutting history sync from incognito for R1. bob already removed the sync hook behind the flag.' },
+  { id: 'i4', ws: 'incog', kind: 'Design', type: 'fig', title: 'Incognito window mocks', path: '~/Desktop/', owner: 'leo', at: ago(3), key: 3, pinBy: 'leo',
+    text: 'Dark window chrome, mask icon, and a banner that explains what is and is not saved.' },
+
+  { id: 't1', ws: 'tabs', kind: 'RFC', type: 'md', title: 'Tab discard RFC', path: '~/code/browser/docs/', owner: 'mina', at: ago(6), key: 1, pinBy: 'mina',
+    text: 'Start discarding background tabs at 48 open tabs on 8 GB devices and 120 on 16 GB. Pinned tabs and tabs playing audio are never discarded.' },
+  { id: 't3', ws: 'tabs', kind: 'Data', type: 'csv', title: 'Tab memory benchmark', path: 'Drive / Browser / Tabs', owner: 'rae', at: ago(7), key: 2, pinBy: 'mina',
+    text: 'Median 92 MB per background tab. 8 GB devices start swapping at around 52 tabs.' },
+  { id: 't2', ws: 'tabs', kind: 'Readme', type: 'md', title: 'tabs/README.md', path: '~/code/browser/tabs/', owner: 'tom', at: ago(44), stale: true,
+    text: 'Tabs are discarded once 64 tabs are open, regardless of device memory.' },
+  { id: 't4', ws: 'tabs', kind: 'Thread', type: 'slack', title: '#tabs, Oct 27', path: 'Slack / #tabs', owner: 'mina', at: ago(4),
+    text: 'shipping the memory-aware discard thresholds from the rfc in 131. the readme is out of date.' },
+
+  { id: 's1', ws: 'sync', kind: 'Plan', type: 'pdf', title: 'Sync v2 rollout plan', path: '~/Documents/Specs/sync/', owner: 'priya', at: ago(12), key: 1, pinBy: 'priya',
+    text: 'Roll out to 5% on Nov 10, 25% on Nov 24, and everyone by Dec 8 if the crash rate stays under 0.2%.' },
+  { id: 's2', ws: 'sync', kind: 'Doc', type: 'doc', title: 'Sync architecture', path: 'Drive / Browser / Sync', owner: 'priya', at: ago(18), key: 2, pinBy: 'jen',
+    text: 'Sync clients send a heartbeat with device ID and timestamp every 30 seconds. Private profiles never register a sync client.' },
+];
+FILES.push(
+  { id: 'g4', ws: 'growth', kind: 'Spec', type: 'md', title: 'Checklist engineering spec', path: '~/code/growth/docs/', owner: 'jen', at: ago(9),
+    text: 'Step one, connect a source, creates an API key with the sources:write scope for the new workspace.' },
+  { id: 's3', ws: 'sync', kind: 'Doc', type: 'doc', title: 'Sync v2 client changes', path: 'Drive / Browser / Sync', owner: 'jen', at: ago(5), key: 3, pinBy: 'priya',
+    text: 'v2 clients register with the sync server when a profile is created, including temporary profiles, so first sync starts faster.' },
+  { id: 'i5', ws: 'incog', kind: 'Notes', type: 'md', title: 'Incognito engineering notes', path: '~/code/browser/docs/', owner: 'bob', at: ago(6),
+    text: 'Private tabs are never written to disk. A discarded private tab can\'t be reloaded from a saved copy, so it is lost.' },
+);
+
+// Workstreams you aren't part of yet, which Index found working near yours
+WS.push(
+  { id: 'sso', name: 'Enterprise SSO', status: 'none', desc: 'Let enterprise admins sign in with Okta or Azure AD and map groups to access levels.', team: ['rae','tom'], watch: ['sam'],
+    near: { to: 'perm', why: 'Maps identity-provider groups to the same four API roles' } },
+  { id: 'devportal', name: 'Developer portal redesign', status: 'none', desc: 'A new developer portal with API keys, usage and docs in one place.', team: ['leo','priya'], watch: [],
+    near: { to: 'perm', why: 'Redesigns the API keys page that still lists per-key scopes' } },
+  { id: 'restore', name: 'Session restore', status: 'none', desc: 'Bring back every window and tab after a crash or update.', team: ['tom','mina'], watch: ['rae'],
+    near: { to: 'incog', why: 'Plans to save private windows in the session file' } },
+);
+WS.slice(-3).forEach(w => wsBy[w.id] = w);
+FILES.push(
+  { id: 'sso1', ws: 'sso', kind: 'Proposal', type: 'doc', title: 'SSO group mapping proposal', path: 'Drive / Enterprise', owner: 'rae', at: ago(4), key: 1, pinBy: 'rae',
+    text: 'Map identity-provider groups straight to API roles: Owner, Admin, Developer and Read-only.' },
+  { id: 'dp1', ws: 'devportal', kind: 'Design', type: 'fig', title: 'Developer portal: API keys page', path: 'Drive / Design', owner: 'leo', at: ago(3), key: 1, pinBy: 'leo',
+    text: 'The new API keys page lists each key\'s scopes and lets developers edit them one by one.' },
+  { id: 'rs1', ws: 'restore', kind: 'Spec', type: 'doc', title: 'Session restore spec', path: 'Drive / Browser / Restore', owner: 'tom', at: ago(2), key: 1, pinBy: 'tom',
+    text: 'After a crash, restore every window, including private windows, from the session file on disk.' },
+);
+
+// Conflicts Index found by comparing plans across workstreams
+const OVERLAPS = [
+  { id: 'o1', a: 'perm', b: 'growth', fa: 'p1', fb: 'g4', when: 'Nov 18', days: 18, people: ['alice','jen'], decider: 'david',
+    title: 'New API roles may break the onboarding checklist',
+    summary: 'Permissions replaces per-key scopes with roles on Nov 18. The checklist\'s first step still creates a key with the sources:write scope, two weeks into the experiment.',
+    decide: 'David Chen owns the API key contract. Index suggests the checklist create a Developer-role key instead of a scoped one.' },
+  { id: 'o2', a: 'incog', b: 'sync', fa: 'i2', fb: 's3', when: 'Nov 24', days: 24, people: ['david','priya'], decider: 'marcus',
+    title: 'Sync v2 would register private windows with the sync server',
+    summary: 'Incognito promises private windows never contact sync servers. Sync v2 registers every new profile, including temporary ones, and reaches 25% of people on Nov 24.',
+    decide: 'Marcus Hill signed off the incognito privacy review, so legal makes the call on whether private profiles can register.' },
+  { id: 'o3', a: 'tabs', b: 'incog', fa: 't1', fb: 'i5', when: 'Version 131', people: ['mina','bob'], decider: 'mina',
+    title: 'Tab discarding could lose private tabs',
+    summary: 'Tabs will start discarding background tabs at 48 open tabs. Private tabs can\'t be reloaded from disk, and neither plan says whether they are exempt.',
+    decide: 'Mina Park owns the discard rules. The fix is likely one line: never discard private tabs, the same as pinned ones.' },
+  { id: 'o4', a: 'restore', b: 'incog', fa: 'rs1', fb: 'i5', when: 'In planning', people: ['tom','david'], decider: 'david',
+    title: 'Session restore plans to save private windows to disk',
+    summary: 'A team you don\'t follow is planning to write private windows to the session file. Incognito depends on private tabs never touching disk.',
+    decide: 'David Chen leads both browser workstreams, so he can settle this. Index found no discussion between the two teams yet.' },
+];
+const ovState = Object.fromEntries(OVERLAPS.map(o => [o.id, {}]));
+const overlapsFor = id => OVERLAPS.filter(o => o.a === id || o.b === id);
+
+const fileBy = Object.fromEntries(FILES.map(f => [f.id, f]));
+const TYPES = [['pdf','PDFs'],['doc','Docs'],['md','Markdown'],['slack','Slack'],['csv','Sheets'],['fig','Designs']];
+
+const SOURCES = [
+  { id: 'specs', label: 'Specs folder', path: '~/Documents/Specs', items: 214, mode: 'allow' },
+  { id: 'code', label: 'Code checkouts', path: '~/code', items: 602, mode: 'allow' },
+  { id: 'desktop', label: 'Desktop', path: '~/Desktop', items: 38, mode: 'allow' },
+  { id: 'downloads', label: 'Downloads', path: '~/Downloads', items: 171, mode: 'block' },
+  { id: 'drive', label: 'Google Drive', path: 'Drive / team folders', items: 318, mode: 'allow' },
+  { id: 'slack', label: 'Slack', path: '#platform-api, #incognito, #tabs', items: 143, mode: 'allow' },
+];
+const srcFor = f => f.path.startsWith('~/Documents') ? 'specs' : f.path.startsWith('~/code') ? 'code' : f.path.startsWith('~/Desktop') ? 'desktop' : f.path.startsWith('~/Downloads') ? 'downloads' : f.path.startsWith('Drive') ? 'drive' : 'slack';
+const src = id => SOURCES.find(s => s.id === id);
+const readable = f => src(srcFor(f)).mode === 'allow';
+const passesFilters = f => state.types.has(f.type) && (state.date === 'any' || (TODAY - f.at) / 864e5 <= +state.date);
+const filtersOn = () => state.types.size < TYPES.length || state.date !== 'any';
+function updateFilterBadge() { $('#filterBadge').hidden = !filtersOn(); }
+
+const state = {
+  view: 'login', wsId: null, query: '', scope: null, tab: 'all', settingsTab: 'profile',
+  types: new Set(TYPES.map(t => t[0])), date: 'any',
+  askPolicy: 'owner', draftReplies: true,
+  notify: { questions: true, staleWorking: true, staleWatching: false },
+  inbox: [
+    { id: 'n1', kind: 'question', ws: 'perm', from: 'alice', when: '12 min', text: 'What was the final decision on the architecture for this API?' },
+    { id: 'n2', kind: 'stale', ws: 'perm', file: 'p2', when: '1 hr' },
+    { id: 'n3', kind: 'context', ws: 'growth', when: '3 hr', text: 'The experiment brief doesn\'t say when the test can stop early. Do you know the stopping rule?' },
+    { id: 'n4', kind: 'stale', ws: 'tabs', file: 't2', when: 'Yesterday' },
+  ],
+  extraFeed: {},
+};
+
+const REPAIRS = {
+  p2: { section: 'Status', del: 'Status: Proposed. … A decision is pending the architecture review.', ins: 'Status: Accepted (Oct 23). Roles are enforced at the API gateway with a 60-second cache. Services keep a fallback check for admin-only endpoints.', why: 'The Oct 23 review notes and the #platform-api thread both record the decision.' },
+  t2: { section: 'Discarding', del: 'Tabs are discarded once 64 tabs are open, regardless of device memory.', ins: 'Background tabs are discarded at 48 open tabs on 8 GB devices and 120 on 16 GB. Pinned tabs and tabs playing audio are never discarded.', why: 'The tab discard RFC and the Oct 27 #tabs thread describe the new thresholds.' },
+  i1: { section: '§3.2 Data handling', del: 'History sync in incognito is on by default and end-to-end encrypted…', ins: 'Incognito windows never contact sync servers. History sync was cut for R1 because encrypted sync still exposes visit timing (privacy review, Oct 21).', why: 'The privacy review notes and the Oct 22 #incognito thread say sync was cut.' },
+};
+
+const SCENARIOS = [
+  { re: /permission|architecture|gateway|role|scope/i, ws: 'perm', hits: ['p4','p2','p3','p1'],
+    answer: () => `The team chose to enforce roles at the API gateway, with a 60-second role cache. Services keep a fallback check for admin-only endpoints<button class="cite" data-f="p4">1</button>. This was decided at the Oct 23 architecture review, and Priya started the migration script the next day<button class="cite" data-f="p3">3</button>. RFC-041 still lists the decision as pending<button class="cite" data-f="p2">2</button>.`,
+    repair: 'p2' },
+  { re: /incognito|history sync|private/i, ws: 'incog', hits: ['i1','i2','i3','s2'],
+    gap: { text: 'The PRD says history sync is on by default, but a Slack thread says it was cut. I couldn\'t find who made the final call.', ask: 'alice', reply: 'Marcus and I made the call on Oct 21. Even encrypted, sync leaks visit timing. We may revisit local-only sync for R2.' },
+    answer: ctx => `History sync was cut from incognito for Release 1. Even encrypted sync sends visit timing and device count to the server<button class="cite" data-f="i2">2</button>, and private profiles should never register a sync client<button class="cite" data-f="s2">4</button>. The sync hook was removed behind a flag on Oct 22<button class="cite" data-f="i3">3</button>. ${ctx ? ctx : 'Who made the final decision isn\'t written down anywhere.'}`,
+    repair: 'i1' },
+  { re: /tab|discard|memory/i, ws: 'tabs', hits: ['t1','t4','t3','t2'],
+    answer: () => `It depends on device memory. Background tabs are discarded at 48 open tabs on 8 GB devices and 120 on 16 GB<button class="cite" data-f="t1">1</button>, shipping in version 131<button class="cite" data-f="t4">2</button>. The 8 GB number comes from benchmarks showing swapping starts near 52 tabs<button class="cite" data-f="t3">3</button>. The tabs README still says a flat 64.`,
+    repair: 't2' },
+];
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait = ms => new Promise(r => setTimeout(r, reduced ? 80 : ms));
+const fmt = d => { const n = Math.round((TODAY - d) / 864e5); return n === 0 ? 'Today' : n === 1 ? 'Yesterday' : n < 7 ? `${n} days ago` : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+const face = (id, cls = '') => `<img class="face ${cls}" src="people/${id}.jpg" alt="${esc(PEOPLE[id].name)}" title="${esc(PEOPLE[id].name)}">`;
+const faces = (ids, cls = '') => `<div class="faces ${cls}">${ids.map(id => face(id)).join('')}</div>`;
+const idxMark = '<span class="idx"><img src="icons/logo.svg" alt="Index"></span>';
+const keyRefs = w => FILES.filter(f => f.ws === w.id && f.key).sort((a, b) => a.key - b.key);
+let tt; function toast(m) { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, 2400); }
+
+function go(view, opts = {}) {
+  Object.values(ovState).forEach(s => delete s.justThreaded);
+  Object.assign(state, { view }, opts);
+  closePops(); render(); window.scrollTo({ top: 0 });
+}
+$('#homeBtn').addEventListener('click', () => { $('#q').value = ''; go('home'); });
+$('#searchForm').addEventListener('submit', e => { e.preventDefault(); const q = $('#q').value.trim(); if (q) go('search', { query: q, scope: state.view === 'ws' ? state.wsId : state.view === 'search' ? state.scope : null, tab: 'all' }); });
+
+// ---------- popovers ----------
+function closePops() { ['filter','notif','settings'].forEach(k => { $(`#${k}Pop`).hidden = true; $(`#${k}Btn`).setAttribute('aria-expanded', 'false'); }); }
+function togglePop(k, fill) {
+  const p = $(`#${k}Pop`); const open = p.hidden; closePops();
+  if (open) { fill(); p.hidden = false; $(`#${k}Btn`).setAttribute('aria-expanded', 'true'); }
+}
+// composedPath keeps the original path even when a click re-renders (and detaches) its own target
+document.addEventListener('click', e => { if (!e.composedPath().some(n => n.classList?.contains('popwrap'))) closePops(); });
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-dead], a[data-help]'); if (!a) return;
+  e.preventDefault();
+  if (a.hasAttribute('data-help')) go('help');
+});
+
+const openCount = () => state.inbox.filter(n => !n.done).length;
+function updateBell() {
+  const n = openCount(); const c = $('#notifCount');
+  c.hidden = !n; c.textContent = n;
+  $('#notifBtn').setAttribute('aria-label', n ? `Notifications, ${n} open` : 'Notifications');
+  if ($('#notifHead')) $('#notifHead').textContent = n ? `${n} open` : 'All caught up';
+}
+$('#notifBtn').addEventListener('click', () => togglePop('notif', () => {
+  $('#notifPop').innerHTML = `<div class="notif-h"><h3>Notifications</h3><span id="notifHead"></span></div><div class="inbox" id="inbox"></div>`;
+  renderInbox($('#inbox'));
+}));
+
+$('#filterBtn').addEventListener('click', () => togglePop('filter', () => {
+  $('#filterPop').innerHTML = `
+    <div class="grp"><h4>File types</h4>
+      ${TYPES.map(([k, l]) => `<label><input type="checkbox" id="ft-${k}" data-k="${k}" ${state.types.has(k) ? 'checked' : ''}> ${l}</label>`).join('')}</div>
+    <div class="grp"><h4>Updated</h4>
+      ${[['any','Any time'],['7','Past week'],['30','Past month']].map(([v, l]) => `<label><input type="radio" name="fdate" id="fd-${v}" value="${v}" ${state.date === v ? 'checked' : ''}> ${l}</label>`).join('')}</div>
+    <button class="btn ghost" id="fClear" type="button" style="align-self:flex-start;padding-left:0">Clear filters</button>`;
+  const apply = () => { updateFilterBadge(); if (state.view === 'search') render(); };
+  $('#filterPop').querySelectorAll('[data-k]').forEach(i => i.onchange = () => { i.checked ? state.types.add(i.dataset.k) : state.types.delete(i.dataset.k); apply(); });
+  $('#filterPop').querySelectorAll('[name="fdate"]').forEach(i => i.onchange = () => { state.date = i.value; apply(); });
+  $('#fClear').onclick = () => { state.types = new Set(TYPES.map(t => t[0])); state.date = 'any'; closePops(); apply(); };
+}));
+
+const SETTINGS_TABS = [
+  ['profile', 'Profile', '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'],
+  ['sources', 'Sources Index can read', '<path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>'],
+  ['notifications', 'Notifications', '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/>'],
+  ['context', 'Questions & context', '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/>'],
+];
+const SIGNOUT_IC = '<path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h11"/>';
+$('#settingsBtn').addEventListener('click', () => togglePop('settings', () => {
+  $('#settingsPop').innerHTML = `<div class="me-row"><img src="people/me.jpg" alt=""><div>You<small>${esc(PEOPLE.me.role)}</small></div></div>
+    ${SETTINGS_TABS.map(([k, l, ic]) => `<button type="button" data-st="${k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ic}</svg>${l}</button>`).join('')}
+    <hr><button type="button" id="helpLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17.5h.01"/></svg>Help center</button>
+    <button type="button" id="signOut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${SIGNOUT_IC}</svg>Sign out</button>`;
+  $('#settingsPop').querySelectorAll('[data-st]').forEach(b => b.addEventListener('click', () => go('settings', { settingsTab: b.dataset.st })));
+  $('#helpLink').addEventListener('click', () => go('help'));
+  $('#signOut').addEventListener('click', () => { $('#q').value = ''; go('login'); });
+}));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if ($('#modal').innerHTML) closeFile(); else closePops(); }
+  if (e.key === '/' && !e.target.closest('input, textarea')) { e.preventDefault(); $('#q').focus(); }
+});
+
+// ---------- file viewer ----------
+function openFile(id) {
+  const f = fileBy[id]; const w = wsBy[f.ws]; const rep = REPAIRS[id];
+  const blocked = !readable(f);
+  const bodyHTML = blocked
+    ? `<p style="color:var(--muted)">Index isn't allowed to open files in ${esc(src(srcFor(f)).label)}. Change this in Settings, Sources.</p>`
+    : `<p class="${f.stale ? 'stale-p' : f.fixed ? 'hl' : ''}">${esc(f.text)}</p>${(f.body || []).map(([h, p]) => f.type === 'slack' ? `<p><b style="font-weight:500">${esc(h)}:</b> ${esc(p)}</p>` : `<h3>${esc(h)}</h3><p>${esc(p)}</p>`).join('')}`;
+  $('#modal').innerHTML = `<div class="overlay" id="overlay"><article class="doc" role="dialog" aria-modal="true" aria-label="${esc(f.title)}">
+    <div class="doc-bar"><span class="mono">${esc(f.path)}${f.type === 'slack' ? '' : esc(f.title)}</span><button class="x" id="closeDoc" type="button" aria-label="Close">✕</button></div>
+    <div class="doc-main">
+      <span class="k">${esc(f.kind)} · ${esc(w.name)}</span>
+      <h2>${esc(f.title)}</h2>
+      <div class="doc-meta">${face(f.owner)}<span>${esc(PEOPLE[f.owner].name)}</span><span>·</span><span>Updated ${fmt(f.at)}</span>${f.key ? '<span class="tag key">Key reference</span>' : ''}${f.stale ? '<span class="tag stale">Out of date</span>' : ''}${f.fixed ? '<span class="tag fixed">Repaired by Index</span>' : ''}</div>
+      ${f.stale && rep && !blocked ? `<div class="repair" id="docRepair"><div><strong>Index found newer information.</strong> <span style="color:var(--muted)">${esc(rep.why)}</span></div>
+        <div class="diff"><span class="mono" style="color:var(--faint)">${esc(rep.section)}</span><del>${esc(rep.del)}</del><ins>${esc(rep.ins)}</ins></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="docApply" type="button">Apply fix</button><button class="btn" id="docSend" type="button">Send to ${esc(first(f.owner))}</button></div></div>` : ''}
+      ${bodyHTML}
+    </div>
+    <div class="doc-foot"><button class="btn" id="docWs" type="button">Open ${esc(w.name)}</button><button class="btn" id="docAsk" type="button">Ask Index about this file</button></div>
+  </article></div>`;
+  document.body.classList.add('modal-open');
+  $('#overlay').addEventListener('click', e => { if (e.target.id === 'overlay') closeFile(); });
+  $('#closeDoc').addEventListener('click', closeFile); $('#closeDoc').focus();
+  $('#docWs').addEventListener('click', () => { closeFile(); go('ws', { wsId: w.id }); });
+  $('#docAsk').addEventListener('click', () => { closeFile(); const q = `What's the latest on ${f.title}?`; $('#q').value = q; go('search', { query: q, scope: w.id, tab: 'all' }); });
+  if ($('#docApply')) {
+    $('#docApply').addEventListener('click', () => { applyRepair(id); toast(`Updated ${f.title}`); openFile(id); render(); });
+    $('#docSend').addEventListener('click', () => { $('#docRepair').innerHTML = `<span class="tag fixed" style="align-self:flex-start">Sent to ${esc(PEOPLE[f.owner].name)} for review</span>`; });
+  }
+}
+function closeFile() { $('#modal').innerHTML = ''; document.body.classList.remove('modal-open'); }
+function bindFiles(root) { root.querySelectorAll('[data-file]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); openFile(b.dataset.file); })); }
+
+// ---------- home ----------
+function stackHTML(w) {
+  const refs = keyRefs(w).slice(0, 3);
+  if (!refs.length) return `<div class="empty">No files yet</div>`;
+  // front sheet is the top reference; the others sit behind and fan out on hover
+  const order = refs.length === 1 ? [['s2', refs[0]]] : refs.length === 2 ? [['s1', refs[1]], ['s2', refs[0]]] : [['s1', refs[1]], ['s3', refs[2]], ['s2', refs[0]]];
+  return `<div class="stack n${refs.length}">${order.map(([pos, f]) => `<button type="button" class="sheet ${pos} ${pos !== 's2' ? 'behind' : ''}" data-file="${f.id}" aria-label="Open ${esc(f.title)}">
+    <span class="k">${esc(f.kind)}</span><b>${esc(f.title)}</b><span class="t">${esc(f.text.slice(0, 64))}…</span></button>`).join('')}</div>
+    <div class="stack-hint">Click a page to open it</div>`;
+}
+// ---------- overlaps ----------
+const openOverlaps = () => OVERLAPS.filter(o => !ovState[o.id].dismissed && !ovState[o.id].thread);
+function ovSide(wsId, fid) {
+  const w = wsBy[wsId]; const f = fileBy[fid];
+  return `<button type="button" class="ov-side" data-file="${f.id}" title="${esc(f.text)}">
+    <span class="wtag ${w.status}">${statusLabel(w)}</span><b>${esc(w.name)}</b>
+    <span class="ov-file">${esc(f.title)}</span></button>`;
+}
+function ovCard(o) {
+  const s = ovState[o.id];
+  const names = o.people.map(p => PEOPLE[p].name).join(' and ');
+  if (s.dismissed) return `<article class="ov done" data-ov="${o.id}"><span>Marked “${esc(o.title)}” as not a conflict.</span><button class="btn" data-ovact="undo" type="button">Undo</button></article>`;
+  if (s.thread) return `<article class="ov done" data-ov="${o.id}"><span class="ok">✓ Started a thread with ${esc(names)}.</span><span>Index attached both documents.</span></article>`;
+  return `<article class="ov" data-ov="${o.id}">
+    <div class="ov-top"><span class="when">${esc(o.when)}${o.days ? ` · ${o.days}d` : ''}</span><div class="faces" title="${esc(names)}">${o.people.map(p => face(p)).join('')}</div></div>
+    <h3>${esc(o.title)}</h3>
+    ${s.decide ? `<div class="ov-decide">${idxMark}<span>${esc(o.decide)}</span></div>` : `<p class="ov-sum">${esc(o.summary)}</p>`}
+    <div class="ov-pair">${ovSide(o.a, o.fa)}${ovSide(o.b, o.fb)}</div>
+    <div class="ov-foot">
+      <button class="btn primary" data-ovact="thread" type="button">Start a thread</button>
+      ${s.decide ? '' : '<button class="btn" data-ovact="decide" type="button">Who decides?</button>'}
+      <button class="btn ghost" data-ovact="dismiss" type="button">Dismiss</button></div>
+  </article>`;
+}
+function carouselHTML(id, list, empty) {
+  return `<div class="ovs" id="${id}">${list.map(ovCard).join('') || `<article class="ov done"><span class="ok">✓ ${empty}</span></article>`}</div>`;
+}
+const carNav = id => `<div class="car-nav" data-car="${id}"><button type="button" data-dir="-1" aria-label="Previous">←</button><button type="button" data-dir="1" aria-label="Next">→</button></div>`;
+function bindCarousel(id) {
+  const track = document.getElementById(id); const nav = document.querySelector(`[data-car="${id}"]`);
+  if (!track || !nav) return;
+  const [prev, next] = nav.querySelectorAll('button');
+  const sync = () => { prev.disabled = track.scrollLeft < 4; next.disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4; };
+  const step = () => (track.firstElementChild?.getBoundingClientRect().width || 360) + 16;
+  nav.querySelectorAll('button').forEach(b => b.addEventListener('click', () => track.scrollBy({ left: step() * +b.dataset.dir, behavior: reduced ? 'auto' : 'smooth' })));
+  track.addEventListener('scroll', sync, { passive: true }); sync();
+}
+function bindOverlaps(root, rerender) {
+  root.querySelectorAll('[data-ovact]').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    const id = b.closest('[data-ov]').dataset.ov; const s = ovState[id]; const o = OVERLAPS.find(x => x.id === id);
+    const act = b.dataset.ovact;
+    if (act === 'thread') { s.thread = true; s.justThreaded = true; toast(`Started a thread with ${o.people.map(first).join(' and ')}`); [o.a, o.b].forEach(w => (state.extraFeed[w] ||= []).unshift({ who: 'me', text: `Started a thread about “${o.title}”`, when: 'Just now' })); }
+    if (act === 'decide') s.decide = true;
+    if (act === 'dismiss') s.dismissed = true;
+    if (act === 'undo') s.dismissed = false;
+    rerender();
+  }));
+  bindFiles(root);
+}
+const statusLabel = w => w.status === 'none' ? 'Not following' : w.status;
+
+function nearCard(w) {
+  const to = wsBy[w.near.to];
+  const ov = overlapsFor(w.id).length;
+  return `<article class="near" tabindex="0" role="link" data-ws="${w.id}" aria-label="${esc(w.name)}">
+    <div class="near-top">${faces(w.team)}<span class="near-to">Near ${esc(to.name)}</span></div>
+    <h3>${esc(w.name)}</h3>
+    <p>${esc(w.near.why)}.</p>
+    <div class="near-foot">${ov ? `<span class="alert">${ov} overlap</span>` : `<span>${FILES.filter(f => f.ws === w.id).length} file</span>`}<span style="flex:1"></span>
+      ${w.status === 'none' ? '<button class="btn" data-watch type="button">Watch</button>' : '<span class="wtag watching">Watching</span>'}</div>
+  </article>`;
+}
+function watchWs(id, on) {
+  const w = wsBy[id];
+  w.status = on ? 'watching' : 'none';
+  w.watch = on ? [...new Set([...w.watch, 'me'])] : w.watch.filter(p => p !== 'me');
+  toast(on ? `Watching ${w.name}` : `Stopped watching ${w.name}`);
+}
+
+function wsCard(w) {
+  const files = FILES.filter(f => f.ws === w.id);
+  const stale = files.filter(f => f.stale).length;
+  const qs = state.inbox.filter(n => n.ws === w.id && !n.done).length;
+  const ovs = overlapsFor(w.id).filter(o => openOverlaps().includes(o)).length;
+  return `<article class="ws" tabindex="0" role="link" data-ws="${w.id}" aria-label="${esc(w.name)}">
+    <span class="status ${w.status}">${w.status.toUpperCase()}</span>
+    <h3>${esc(w.name)}</h3>
+    ${faces(w.team)}
+    ${stackHTML(w)}
+    ${files.length ? `<div class="meta"><span>${files.length} files</span>${ovs ? `<span class="alert">${ovs} overlap${ovs > 1 ? 's' : ''}</span>` : ''}${stale ? `<span class="alert">${stale} out of date</span>` : ''}${qs ? `<span class="you">${qs} for you</span>` : ''}</div>` : ''}
+  </article>`;
+}
+function renderHome(el) {
+  const list = WS.filter(w => w.status !== 'none');
+  const working = list.filter(w => w.status === 'working').length;
+  const near = WS.filter(w => w.near);
+  const ovs = OVERLAPS.filter(o => !ovState[o.id].thread || ovState[o.id].justThreaded);
+  const done = OVERLAPS.filter(o => ovState[o.id].thread).length;
+  const keepX = $('#ovList')?.scrollLeft || 0;
+  el.innerHTML = `<div class="home">
+      <section>
+        <h2>Overlaps with other teams <small>${openOverlaps().length} need a decision${done ? ` · ${done} handled in a thread` : ''}</small>${ovs.length > 1 ? carNav('ovList') : ''}</h2>
+        ${carouselHTML('ovList', ovs, 'No open overlaps. Index compares plans across teams every day and will flag the next one here.')}
+      </section>
+      <section>
+        <h2>Your workstreams <small>${working} working on · ${list.length - working} watching</small></h2>
+        <div class="grid">${list.map(wsCard).join('')}
+          <article class="ws create" tabindex="0" role="button" id="createWs"><img src="icons/add.svg" alt="">Create or join a workstream</article>
+        </div>
+      </section>
+      <section>
+        <h2>Teams working near you <small>Workstreams you don't follow that touch the same areas</small></h2>
+        <div class="nears">${near.map(nearCard).join('')}</div>
+      </section>
+  </div>`;
+  $('#ovList').style.scrollBehavior = 'auto'; $('#ovList').scrollLeft = keepX; $('#ovList').style.scrollBehavior = '';
+  el.querySelectorAll('.ws[data-ws], .near[data-ws]').forEach(c => {
+    const open = () => go('ws', { wsId: c.dataset.ws });
+    c.addEventListener('click', open); c.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target === c) open(); });
+  });
+  el.querySelectorAll('[data-watch]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); watchWs(b.closest('[data-ws]').dataset.ws, true); renderHome(el); }));
+  bindOverlaps($('#ovList'), () => renderHome(el));
+  bindCarousel('ovList');
+  bindFiles(el.querySelector('.grid'));
+  bindFiles(el.querySelector('.nears'));
+  $('#createWs').addEventListener('click', () => openFlow('join'));
+  $('#createWs').addEventListener('keydown', e => { if (e.key === 'Enter') openFlow('join'); });
+}
+
+// ---------- inbox ----------
+function renderInbox(box, wsFilter) {
+  updateBell();
+  const items = state.inbox.filter(n => !wsFilter || n.ws === wsFilter);
+  if (!items.length) { box.innerHTML = `<div class="note"><p class="msg" style="color:var(--muted)">Nothing needs you here.</p></div>`; return; }
+  box.innerHTML = items.map(n => {
+    const w = wsBy[n.ws];
+    const where = `<button class="where" data-goto="${w.id}" type="button">@ ${esc(w.name)}</button>`;
+    if (n.done) return `<div class="note">${where}<span class="done">✓ ${esc(n.done)}</span></div>`;
+    if (n.kind === 'question') return `<div class="note" data-n="${n.id}">${where}
+      <div class="who">${face(n.from)}${esc(PEOPLE[n.from].name)}<small>${n.when}</small></div>
+      <p class="msg">${esc(n.text)}</p>
+      <div class="slot"><div class="row">${state.draftReplies ? '<button class="btn primary" data-act="draft" type="button">Draft reply with Index</button>' : ''}<button class="btn" data-act="reply" type="button">Reply</button></div></div></div>`;
+    if (n.kind === 'stale') { const f = fileBy[n.file]; const r = REPAIRS[n.file]; return `<div class="note" data-n="${n.id}">${where}
+      <div class="who">${idxMark}Index<small>${n.when}</small></div>
+      <p class="msg"><button class="wslink" style="font-size:inherit;color:var(--accent)" data-file="${f.id}" type="button">${esc(f.title)}</button> is out of date. ${esc(r.why)}</p>
+      <div class="slot"><div class="row"><button class="btn primary" data-act="review" type="button">Review fix</button><button class="btn ghost" data-act="dismiss" type="button">Dismiss</button></div></div></div>`; }
+    return `<div class="note" data-n="${n.id}">${where}
+      <div class="who">${idxMark}Index needs context<small>${n.when}</small></div>
+      <p class="msg">${esc(n.text)}</p>
+      <div class="slot"><textarea id="ctx-${n.id}" placeholder="Type what you know. Index will add it to the brief."></textarea>
+      <div class="row" style="margin-top:8px"><button class="btn primary" data-act="ctx" type="button">Add to brief</button><button class="btn" data-act="askjen" type="button">Ask Jen instead</button></div></div></div>`;
+  }).join('');
+  box.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => go('ws', { wsId: b.dataset.goto })));
+  box.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => inboxAct(b, box, wsFilter)));
+  bindFiles(box);
+}
+function finishNote(id, msg, box, wsFilter) { state.inbox.find(n => n.id === id).done = msg; renderInbox(box, wsFilter); }
+async function inboxAct(b, box, wsFilter) {
+  const noteEl = b.closest('.note'); const n = state.inbox.find(x => x.id === noteEl.dataset.n); const slot = noteEl.querySelector('.slot');
+  const act = b.dataset.act;
+  if (act === 'draft' || act === 'reply') {
+    slot.innerHTML = `<div class="trace" ${act === 'reply' ? 'hidden' : ''}><div class="line run"><i><span class="spin"></span></i>Reading 4 files in Update permissions…</div></div><textarea id="reply-${n.id}" placeholder="Write a reply…"></textarea><div class="row" style="margin-top:8px"><button class="btn primary" data-send type="button">Send to ${esc(first(n.from))}</button></div>`;
+    if (act === 'draft') {
+      await wait(1100);
+      slot.querySelector('.trace').innerHTML = `<div class="line"><i>✓</i>Drafted from Architecture review notes and #platform-api</div>`;
+      slot.querySelector('textarea').value = 'We\'re enforcing roles at the API gateway with a 60-second role cache. Services keep a fallback check for admin-only endpoints. This was decided at the Oct 23 architecture review (notes are pinned in the workstream).';
+    }
+    slot.querySelector('[data-send]').addEventListener('click', () => {
+      const v = slot.querySelector('textarea').value.trim(); if (!v) { slot.querySelector('textarea').focus(); return; }
+      (state.extraFeed[n.ws] ||= []).unshift({ who: 'me', text: `Answered ${first(n.from)}: architecture decision`, when: 'Just now' });
+      finishNote(n.id, `Replied to ${first(n.from)}. Index saved the answer to this workstream.`, box, wsFilter); toast(`Reply sent to ${first(n.from)}`);
+    });
+  } else if (act === 'review') {
+    const r = REPAIRS[n.file]; const f = fileBy[n.file];
+    slot.innerHTML = `<div class="diff"><span class="mono" style="color:var(--faint)">${esc(r.section)}</span><del>${esc(r.del)}</del><ins>${esc(r.ins)}</ins></div>
+      <div class="row" style="margin-top:8px"><button class="btn primary" data-apply type="button">Apply fix</button><button class="btn" data-send type="button">Send to ${esc(first(f.owner))}</button></div>`;
+    slot.querySelector('[data-apply]').addEventListener('click', () => { applyRepair(n.file); finishNote(n.id, `Updated ${f.title}`, box, wsFilter); toast(`Updated ${f.title}`); render(); });
+    slot.querySelector('[data-send]').addEventListener('click', () => finishNote(n.id, `Sent the suggested edit to ${PEOPLE[f.owner].name}`, box, wsFilter));
+  } else if (act === 'dismiss') {
+    state.inbox = state.inbox.filter(x => x.id !== n.id); renderInbox(box, wsFilter);
+  } else if (act === 'ctx') {
+    const v = $('#ctx-' + n.id).value.trim(); if (!v) { $('#ctx-' + n.id).focus(); return; }
+    (state.extraFeed[n.ws] ||= []).unshift({ who: 'me', text: `Added a stopping rule to the brief: “${v}”`, when: 'Just now' });
+    const g = fileBy.g1; g.body = g.body.map(([h, p]) => h === 'Stopping rule' ? [h, v] : [h, p]);
+    finishNote(n.id, 'Added to the experiment brief', box, wsFilter);
+  } else if (act === 'askjen') {
+    finishNote(n.id, 'Index asked Jen Walsh. You\'ll see the answer here.', box, wsFilter);
+  }
+}
+function applyRepair(fid) {
+  const f = fileBy[fid]; f.stale = false; f.fixed = true; f.text = REPAIRS[fid].ins; f.at = new Date(TODAY);
+  (state.extraFeed[f.ws] ||= []).unshift({ who: 'idx', text: `Index updated ${f.title}`, when: 'Just now' });
+  state.inbox.forEach(n => { if (n.kind === 'stale' && n.file === fid && !n.done) n.done = `Updated ${f.title}`; });
+}
+
+// ---------- workstream page ----------
+function renderWs(el) {
+  const w = wsBy[state.wsId];
+  const files = FILES.filter(f => f.ws === w.id).sort((a, b) => b.at - a.at);
+  const refs = keyRefs(w);
+  const feed = [...(state.extraFeed[w.id] || []), ...files.map(f => ({ who: f.owner, text: `${first(f.owner)} ${f.type === 'slack' ? 'posted in' : 'updated'} ${f.title}`, when: fmt(f.at) }))].slice(0, 6);
+  el.innerHTML = `<div class="col" style="gap:26px">
+    <button class="back" id="back" type="button">← Back to workstreams</button>
+    <div class="page">
+      <div class="col">
+        <div class="ws-head">
+          <span class="status ${w.status}">${statusLabel(w).toUpperCase()}</span>
+          <h1>${esc(w.name)}</h1>
+          <p>${esc(w.desc)}</p>
+          ${w.near ? `<p style="font-size:13.5px;color:var(--accent)">Index found this near ${esc(wsBy[w.near.to].name)}: ${esc(w.near.why.toLowerCase())}.</p>` : ''}
+          <div class="acts">${faces(w.team, 'lg')}<span style="color:var(--muted);font-size:13px">${w.team.length} working · ${w.watch.length} watching</span><span style="flex:1"></span>
+            <button class="btn ${w.status === 'none' ? 'primary' : ''}" id="toggleWatch" type="button">${w.status === 'working' ? 'Leave workstream' : w.status === 'watching' ? 'Stop watching' : 'Watch'}</button></div>
+        </div>
+        ${overlapsFor(w.id).length ? `<section><div class="sec-h" style="align-items:center"><h3>Overlaps with other teams</h3><span>${overlapsFor(w.id).filter(o => openOverlaps().includes(o)).length} need a decision</span>${overlapsFor(w.id).length > 1 ? carNav('wsOv') : ''}</div>
+          ${carouselHTML('wsOv', overlapsFor(w.id), '')}</section>` : ''}
+        <section class="panel">
+          <header><h3>Key references</h3><span>Pinned by the team</span></header>
+          ${refs.length ? `<div class="refs">${refs.map(f => `<button class="ref" type="button" data-file="${f.id}">
+            <span class="k">${esc(f.kind)} · ${f.type}</span><b>${esc(f.title)}</b><p>${esc(f.text)}</p>
+            ${f.stale ? '<span class="tag stale" style="align-self:flex-start">Out of date</span>' : f.fixed ? '<span class="tag fixed" style="align-self:flex-start">Repaired by Index</span>' : ''}
+            <span class="by">${face(f.pinBy)}Pinned by ${esc(PEOPLE[f.pinBy].name)}</span></button>`).join('')}</div>`
+            : `<div class="nores">No files yet. Index will suggest references once the team adds some.</div>`}
+        </section>
+        <section class="panel">
+          <header><h3>All files</h3><span>${files.length}</span></header>
+          <div class="results">${files.length ? files.map(f => resultRow(f, [])).join('') : '<div class="nores">No files yet</div>'}</div>
+        </section>
+      </div>
+      <aside class="col">
+        <section class="panel">
+          <header><h3>Ask about ${esc(w.name)}</h3></header>
+          <form class="wsask" id="wsAsk"><input id="wsAskIn" placeholder="e.g. What did we decide?" aria-label="Ask about this workstream"><button class="btn primary" type="submit">Ask</button></form>
+        </section>
+        <section class="panel"><header><h3>For you</h3></header><div id="wsInbox"></div></section>
+        <section class="panel team">
+          <div class="grp"><h4>Working on it</h4>${w.team.map(id => `<div class="member">${face(id)}<div>${esc(PEOPLE[id].name)}<small>${esc(PEOPLE[id].role)}</small></div></div>`).join('')}</div>
+          <div class="grp"><h4>Watching</h4>${w.watch.map(id => `<div class="member">${face(id, 'dim')}<div>${esc(PEOPLE[id].name)}<small>${esc(PEOPLE[id].role)}</small></div></div>`).join('')}</div>
+        </section>
+        <section class="panel"><header><h3>Activity</h3></header><div class="feed">${feed.length ? feed.map(a => `<div class="it">${a.who === 'idx' ? idxMark : face(a.who)}<div>${esc(a.text)}<small>${esc(a.when)}</small></div></div>`).join('') : '<div class="nores">No activity yet</div>'}</div></section>
+      </aside>
+    </div></div>`;
+  $('#back').addEventListener('click', () => go('home'));
+  $('#toggleWatch').addEventListener('click', () => {
+    if (w.status === 'working') { leaveWs(w.id); renderWs(el); return; }
+    watchWs(w.id, w.status === 'none'); renderWs(el);
+  });
+  if ($('#wsOv')) { bindOverlaps($('#wsOv'), () => renderWs(el)); bindCarousel('wsOv'); }
+  $('#wsAsk').addEventListener('submit', e => { e.preventDefault(); const q = $('#wsAskIn').value.trim(); if (q) { $('#q').value = q; go('search', { query: q, scope: w.id, tab: 'all' }); } });
+  bindFiles(el.querySelector('.page > .col'));
+  renderInbox($('#wsInbox'), w.id);
+}
+
+// ---------- search ----------
+function resultRow(f, terms) {
+  const w = wsBy[f.ws];
+  let snip = esc(f.text);
+  terms.forEach(t => { snip = snip.replace(new RegExp(`(${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig'), '<mark>$1</mark>'); });
+  const blocked = !readable(f);
+  return `<div class="result">
+    <div class="ftype t-${f.type}">${f.type}</div>
+    <div style="min-width:0">
+      <button class="t" type="button" data-file="${f.id}">${esc(f.title)}</button>
+      <div class="p mono">${esc(f.path)}</div>
+      <p class="snip">${blocked ? '<span style="color:var(--faint)">Preview hidden. Index isn\'t allowed to open files in this location.</span>' : snip}</p>
+      <div class="tags"><span class="wtag ${w.status}">${statusLabel(w)}</span><button class="wslink" data-goto="${w.id}" type="button">${esc(w.name)}</button>
+        <span>·</span>${face(f.owner)}<span>${esc(PEOPLE[f.owner].name)}</span>${f.key ? '<span class="tag key">Key reference</span>' : ''}${f.stale ? '<span class="tag stale">Out of date</span>' : ''}${f.fixed ? '<span class="tag fixed">Repaired by Index</span>' : ''}</div>
+    </div>
+    <div class="when">${fmt(f.at)}</div></div>`;
+}
+const STOP = new Set('the what why when how did does are was for and with our who can before about this that from into have has will there their they you your any all get got its it is of on in to a an we be do at or by latest'.split(' '));
+function search(q, scope) {
+  const terms = (q.toLowerCase().match(/[a-z0-9-]{3,}/g) || []).filter(t => !STOP.has(t));
+  const pool = FILES.filter(f => (!scope || f.ws === scope) && passesFilters(f));
+  const sc = SCENARIOS.find(s => s.re.test(q) && (!scope || s.ws === scope));
+  const scored = pool.map(f => {
+    const hay = (f.title + ' ' + f.text + ' ' + f.kind + ' ' + wsBy[f.ws].name).toLowerCase();
+    let s = terms.reduce((n, t) => n + (hay.includes(t) ? 1 : 0), 0);
+    if (sc && sc.hits.includes(f.id)) s += 5 - sc.hits.indexOf(f.id) * .5;
+    return { f, s };
+  }).filter(x => x.s > 0).sort((a, b) => b.s - a.s).map(x => x.f);
+  const ws = WS.filter(w => (!scope || w.id === scope) && terms.some(t => (w.name + ' ' + w.desc).toLowerCase().includes(t)));
+  const ppl = Object.keys(PEOPLE).filter(id => id !== 'me' && terms.some(t => (PEOPLE[id].name + ' ' + PEOPLE[id].role).toLowerCase().includes(t)));
+  scored.slice(0, 3).forEach(f => { if (!ppl.includes(f.owner) && f.owner !== 'me') ppl.push(f.owner); });
+  return { terms, files: scored, ws, ppl: ppl.slice(0, 5), sc };
+}
+
+let runId = 0;
+function renderSearch(el) {
+  const { query: q, scope } = state;
+  const r = search(q, scope);
+  const groups = { all: r.files, docs: r.files.filter(f => ['pdf','doc','md'].includes(f.type)), threads: r.files.filter(f => f.type === 'slack'), data: r.files.filter(f => ['csv','fig'].includes(f.type)) };
+  const tabs = [['all','All'],['docs','Documents'],['threads','Threads'],['data','Data & designs']];
+  const rows = k => groups[k].length ? groups[k].map(f => resultRow(f, r.terms)).join('') : `<div class="nores">No ${k === 'all' ? '' : tabs.find(t => t[0] === k)[1].toLowerCase() + ' '}matches. Try other words or search everywhere.</div>`;
+  const wsList = r.ws.length ? r.ws : r.sc ? [wsBy[r.sc.ws]] : [];
+  el.innerHTML = `<div class="col" style="gap:22px">
+    <button class="back" id="back" type="button">← Back to workstreams</button>
+    <div class="q-head"><div class="mono" style="color:var(--faint)">Results for</div><h1>${esc(q)}</h1>
+      <div class="scope">${scope ? `<span class="pill">In ${esc(wsBy[scope].name)} <button id="clearScope" type="button" aria-label="Search everywhere">✕</button></span>` : '<span>Searching every workstream and allowed source</span>'}${filtersOn() ? `<span class="pill">Filtered: ${[state.types.size < TYPES.length ? TYPES.filter(t => state.types.has(t[0])).map(t => t[1]).join(', ') || 'no file types' : '', state.date !== 'any' ? (state.date === '7' ? 'past week' : 'past month') : ''].filter(Boolean).join(' · ')} <button id="clearFilters" type="button" aria-label="Clear filters">✕</button></span>` : ''}</div></div>
+    <div class="page">
+      <div class="col">
+        <section class="panel answer" id="answer"><header><h3 style="display:flex;align-items:center;gap:8px"><img src="icons/logo.svg" alt="" style="width:11px;height:16px">Index</h3><span id="ansState">Working…</span></header><div class="body" id="ansBody"></div></section>
+        <div>
+          <div class="tabs" role="group" aria-label="Result type">${tabs.map(([k, l]) => `<button type="button" data-tab="${k}" aria-pressed="${state.tab === k}">${l}<span>${groups[k].length}</span></button>`).join('')}</div>
+          <section class="panel" style="border-top:0"><div class="results" id="resultList">${rows(state.tab)}</div></section>
+        </div>
+      </div>
+      <aside class="col">
+        <section class="panel"><header><h3>Workstreams</h3><span>${wsList.length}</span></header><div class="mini">${
+          wsList.map(w => `<button type="button" data-goto="${w.id}"><span><span class="nm">${esc(w.name)}</span><span class="sub">${w.status === 'working' ? 'You\'re working on this' : w.status === 'watching' ? 'You\'re watching this' : 'You don\'t follow this yet'}</span></span><span class="wtag ${w.status}" style="margin-left:auto">${statusLabel(w)}</span></button>`).join('') || '<div class="nores">None</div>'}</div></section>
+        <section class="panel"><header><h3>People who may know</h3></header><div class="mini">${r.ppl.map(id => `<button type="button" data-person="${id}">${face(id)}<span><span class="nm">${esc(PEOPLE[id].name)}</span><span class="sub">${esc(PEOPLE[id].role)}</span></span></button>`).join('') || '<div class="nores">None</div>'}</div></section>
+      </aside>
+    </div></div>`;
+  $('#back').addEventListener('click', () => { $('#q').value = ''; go('home'); });
+  if ($('#clearScope')) $('#clearScope').addEventListener('click', () => go('search', { scope: null }));
+  if ($('#clearFilters')) $('#clearFilters').addEventListener('click', () => { state.types = new Set(TYPES.map(t => t[0])); state.date = 'any'; render(); });
+  const bind = root => { root.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => go('ws', { wsId: b.dataset.goto }))); bindFiles(root); };
+  el.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => {
+    state.tab = b.dataset.tab;
+    el.querySelectorAll('[data-tab]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    $('#resultList').innerHTML = rows(state.tab); bind($('#resultList'));
+  }));
+  bind(el);
+  el.querySelectorAll('[data-person]').forEach(b => b.addEventListener('click', () => toast(`Index would message ${PEOPLE[b.dataset.person].name} with your question`)));
+  runAnswer(r);
+}
+
+async function runAnswer(r) {
+  const my = ++runId; const alive = () => my === runId && $('#ansBody');
+  const body = $('#ansBody');
+  const lines = [];
+  const draw = () => body.innerHTML = `<div class="trace">${lines.map(l => `<div class="line ${l.c || ''}"><i>${l.c === 'run' ? '<span class="spin"></span>' : l.c === 'ask' ? '?' : l.c === 'skip' ? '–' : '✓'}</i><span>${l.t}</span></div>`).join('')}</div><div id="ansExtra"></div>`;
+  const step = async (t, ms, c = '') => { lines.push({ t, c: 'run' }); draw(); await wait(ms); lines[lines.length - 1] = { t, c }; draw(); };
+
+  await step(r.sc ? `Looking for a decision in <b style="font-weight:500">${esc(wsBy[r.sc.ws].name)}</b>` : `Looking for “${esc(r.terms.join(', ') || state.query)}”`, 600); if (!alive()) return;
+  const allowed = SOURCES.filter(s => s.mode === 'allow');
+  await step(`Searched ${allowed.length} sources on your machine and team drives (${allowed.reduce((n, s) => n + s.items, 0).toLocaleString()} items)`, 700); if (!alive()) return;
+  SOURCES.filter(s => s.mode !== 'allow').forEach(s => lines.push({ t: `Skipped ${esc(s.path)} because you blocked it`, c: 'skip' }));
+  const usable = r.files.filter(readable).slice(0, 4);
+  if (usable.length) { await step(`Read ${usable.length} file${usable.length > 1 ? 's' : ''}: ${usable.map(f => esc(f.title)).join(', ')}`, 700); if (!alive()) return; }
+
+  let ctx = null;
+  if (r.sc && r.sc.gap && state.askPolicy !== 'never') {
+    lines.push({ t: 'Missing context', c: 'ask' }); draw();
+    ctx = await askGap(r.sc.gap, alive); if (!alive()) return;
+    lines[lines.length - 1] = { t: ctx ? 'Added missing context' : 'Skipped missing context' }; draw();
+  }
+  await step('Wrote an answer', 600); if (!alive()) return;
+
+  const confident = r.sc && (!r.sc.gap || ctx);
+  let answer;
+  if (r.sc) answer = r.sc.answer(ctx);
+  else if (usable.length) answer = usable.slice(0, 2).map(f => `${esc(f.text)}<button class="cite" data-f="${f.id}">${r.files.indexOf(f) + 1}</button>`).join(' ');
+  else answer = `None of your allowed sources mention this yet. Try one of the people on the right, or change what Index can read in Settings.`;
+  const trace = body.querySelector('.trace').outerHTML;
+  const rep = r.sc && r.sc.repair && fileBy[r.sc.repair].stale && readable(fileBy[r.sc.repair]) ? r.sc.repair : null;
+  body.innerHTML = `<p>${answer}</p>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="conf ${confident ? '' : 'mid'}">${confident ? 'High confidence' : usable.length ? 'Partial answer' : 'No answer found'}</span>
+      <details class="how"><summary>How Index found this</summary>${trace}</details></div>
+    ${rep ? `<div class="repair" id="repair"><div><strong>${esc(fileBy[rep].title)} is out of date.</strong> <span style="color:var(--muted)">${esc(REPAIRS[rep].why)}</span></div>
+      <div class="diff"><del>${esc(REPAIRS[rep].del)}</del><ins>${esc(REPAIRS[rep].ins)}</ins></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="applyFix" type="button">Apply fix</button><button class="btn" id="sendFix" type="button">Send to ${esc(first(fileBy[rep].owner))}</button></div></div>` : ''}`;
+  $('#ansState').textContent = '';
+  body.querySelectorAll('.cite[data-f]').forEach(c => c.addEventListener('click', () => openFile(c.dataset.f)));
+  if (rep) {
+    $('#applyFix').addEventListener('click', () => { applyRepair(rep); $('#repair').innerHTML = `<span class="tag fixed" style="align-self:flex-start">Updated ${esc(fileBy[rep].title)}</span>`; toast('Doc updated'); });
+    $('#sendFix').addEventListener('click', () => { $('#repair').innerHTML = `<span class="tag fixed" style="align-self:flex-start">Sent to ${esc(PEOPLE[fileBy[rep].owner].name)} for review</span>`; });
+  }
+}
+function askGap(gap, alive) {
+  return new Promise(resolve => {
+    const ex = $('#ansExtra'); const p = PEOPLE[gap.ask];
+    const canAsk = state.askPolicy === 'owner';
+    ex.innerHTML = `<div class="askbox"><p>${esc(gap.text)}</p>
+      <textarea id="gapIn" placeholder="Add what you know…" aria-label="Add context"></textarea>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="gapAdd" type="button">Add context</button>${canAsk ? `<button class="btn" id="gapAsk" type="button">Ask ${esc(p.name)}</button>` : ''}<button class="btn ghost" id="gapSkip" type="button">Answer without it</button></div></div>`;
+    $('#gapAdd').onclick = () => { const v = $('#gapIn').value.trim(); if (!v) { $('#gapIn').focus(); return; } ex.innerHTML = ''; resolve(`You added: ${esc(v)}`); };
+    $('#gapSkip').onclick = () => { ex.innerHTML = ''; resolve(null); };
+    if (canAsk) $('#gapAsk').onclick = async () => {
+      ex.innerHTML = `<div class="askbox"><div class="trace"><div class="line run"><i><span class="spin"></span></i>Asked ${esc(p.name)}. Waiting for a reply…</div></div></div>`;
+      await wait(1800); if (!alive()) return;
+      ex.innerHTML = '';
+      resolve(`${esc(p.name)} replied: “${esc(gap.reply)}”<span class="cite">+</span>`);
+    };
+  });
+}
+
+// ---------- login ----------
+function renderLogin(el) {
+  el.innerHTML = `<div class="login">
+    <div class="login-hero">
+      <div class="brand"><img src="icons/logo.svg" alt="">Index</div>
+      <h1>Know what every team is shipping, <em>before it breaks yours.</em></h1>
+      <p class="lede">Cross-team knowledge that keeps itself up to date, so you're never out of the loop.</p>
+    <div class="login-art" aria-hidden="true">
+      <div class="la-team la-ta">${faces(['alice','david','priya'])}Platform</div>
+      <div class="la-doc la-a"><span class="k">PRD · Permissions</span><b>Permissions API PRD</b><i></i><i class="hl" style="width:88%"></i><i style="width:72%"></i><i style="width:80%"></i></div>
+      <div class="la-team la-tb">${faces(['jen','leo','nora'])}Growth</div>
+      <div class="la-doc la-b"><span class="k">Spec · Onboarding</span><b>Checklist experiment</b><i style="width:90%"></i><i class="hl"></i><i style="width:64%"></i></div>
+      <div class="la-flag">${idxMark}<div><b>Index found an overlap</b><small>New API roles ship Nov 18. The onboarding checklist still creates a key with an old scope.</small></div></div>
+    </div>
+    </div>
+    <div class="login-side">
+      <div class="login-card">
+        <h2>Sign in to Index</h2>
+        <p class="sub">Use your work account to continue.</p>
+        <form class="auth-box" id="loginForm">
+          <button class="btn" type="button" data-sso="Google"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.3H12v4.3h5.9a5 5 0 0 1-2.2 3.3v2.8h3.6c2-1.9 3.2-4.7 3.2-8.1z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.8c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.9A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 10l3.7-2.9z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 7l3.7 2.9C6.7 7.3 9.1 5.4 12 5.4z"/></svg>Continue with Google</button>
+          <button class="btn" type="button" data-sso="SSO"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Continue with SSO</button>
+          <div class="or">or</div>
+          <label for="loginEmail">Work email</label>
+          <input id="loginEmail" type="email" placeholder="you@company.com" autocomplete="off">
+          <span class="auth-err" id="loginErr" hidden>Enter a valid work email.</span>
+          <button class="btn primary" type="submit">Continue with email</button>
+        </form>
+        <p class="auth-alt">New to Index? <a href="/signup" data-dead>Request access for your team</a></p>
+        <p class="auth-fine">By continuing, you agree to the <a href="/terms" data-dead>Terms of Service</a> and acknowledge the <a href="/privacy" data-dead>Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </div>`;
+  const enter = () => { go('home'); toast('Signed in. Index read 1,486 files across 6 sources.'); };
+  el.querySelectorAll('[data-sso]').forEach(b => b.addEventListener('click', enter));
+  $('#loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = $('#loginEmail').value.trim();
+    if (!/^\S+@\S+\.\S+$/.test(v)) { $('#loginErr').hidden = false; $('#loginEmail').focus(); return; }
+    enter();
+  });
+}
+
+// ---------- create or join a workstream ----------
+const flow = { tab: 'join', q: '', name: '', desc: '', srcs: new Set(), people: new Set() };
+function leaveWs(id) {
+  const w = wsBy[id];
+  w.status = 'watching'; w.team = w.team.filter(p => p !== 'me'); w.watch = [...new Set([...w.watch, 'me'])];
+  toast(`Left ${w.name}. You're still watching it.`);
+}
+function joinWs(id) {
+  const w = wsBy[id];
+  w.status = 'working'; w.team = [...new Set([...w.team, 'me'])]; w.watch = w.watch.filter(p => p !== 'me');
+  (state.extraFeed[id] ||= []).unshift({ who: 'me', text: 'Joined the workstream', when: 'Just now' });
+}
+function openFlow(tab) {
+  Object.assign(flow, { tab, q: '', name: '', desc: '', srcs: new Set(SOURCES.filter(s => s.mode === 'allow').map(s => s.id)), people: new Set() });
+  $('#modal').innerHTML = `<div class="overlay" id="overlay"><article class="flow" role="dialog" aria-modal="true" aria-label="Create or join a workstream" id="flow"></article></div>`;
+  document.body.classList.add('modal-open');
+  $('#overlay').addEventListener('click', e => { if (e.target.id === 'overlay') closeFile(); });
+  renderFlow();
+}
+function renderFlow() {
+  const box = $('#flow'); if (!box) return;
+  const bar = `<div class="flow-bar"><h2>Workstreams</h2><button class="x" id="flowX" type="button" aria-label="Close">✕</button></div>
+    <div class="flow-tabs" role="tablist">${[['join','Join existing'],['create','Create new']].map(([k, l]) => `<button type="button" role="tab" data-ft="${k}" aria-selected="${flow.tab === k}">${l}</button>`).join('')}</div>`;
+  if (flow.tab === 'join') {
+    const q = flow.q.toLowerCase();
+    const list = WS.filter(w => w.status !== 'working' && (!q || (w.name + ' ' + w.desc + ' ' + w.team.map(p => PEOPLE[p].name).join(' ')).toLowerCase().includes(q)));
+    box.innerHTML = `${bar}<div class="flow-main">
+      <input type="search" id="joinQ" placeholder="Search by name, team or teammate" aria-label="Search workstreams" value="${esc(flow.q)}">
+      <div>${list.map(w => `<div class="jrow"><div>
+          <h3>${esc(w.name)}<span class="wtag ${w.status}">${statusLabel(w)}</span></h3>
+          <p>${esc(w.desc)}</p>
+          <div style="display:flex;align-items:center;gap:8px">${faces(w.team)}<span style="font-size:12px;color:var(--muted)">${w.team.map(first).join(', ')}</span></div></div>
+        <div class="acts">${w.status === 'none' ? `<button class="btn" data-fw="${w.id}" type="button">Watch</button>` : ''}<button class="btn primary" data-fj="${w.id}" type="button">Join</button></div></div>`).join('')
+        || `<div class="nores" style="padding:12px 0">No workstreams match. <button class="btn ghost" id="toCreate" type="button" style="padding-left:0">Create “${esc(flow.q)}” instead</button></div>`}</div>
+    </div>`;
+    const qi = $('#joinQ');
+    qi.addEventListener('input', () => { flow.q = qi.value; renderFlow(); const n = $('#joinQ'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+    box.querySelectorAll('[data-fj]').forEach(b => b.addEventListener('click', () => {
+      const w = wsBy[b.dataset.fj]; joinWs(w.id); closeFile(); go('ws', { wsId: w.id }); toast(`Joined ${w.name}. Index added you to its questions.`);
+    }));
+    box.querySelectorAll('[data-fw]').forEach(b => b.addEventListener('click', () => { watchWs(b.dataset.fw, true); renderFlow(); render(); }));
+    if ($('#toCreate')) $('#toCreate').addEventListener('click', () => { flow.name = flow.q; flow.tab = 'create'; renderFlow(); });
+  } else {
+    const ppl = Object.keys(PEOPLE).filter(p => p !== 'me');
+    box.innerHTML = `${bar}<form class="flow-main" id="createForm">
+      <label class="lbl">Name<input type="text" id="cName" placeholder="e.g. Usage-based pricing" value="${esc(flow.name)}" autocomplete="off"></label>
+      <label class="lbl">What is the team doing? <small>Index uses this to find related files and spot overlaps with other teams</small><textarea id="cDesc" placeholder="One or two sentences">${esc(flow.desc)}</textarea></label>
+      <div class="grp"><h4>Build the knowledge base from<small>Only sources you allow in Settings</small></h4>
+        <div class="chips">${SOURCES.map(s => `<button type="button" class="chip src" data-cs="${s.id}" aria-pressed="${flow.srcs.has(s.id)}" ${s.mode === 'block' ? 'disabled title="Blocked in Settings"' : ''}>${esc(s.label)}</button>`).join('')}</div></div>
+      <div class="grp"><h4>Invite teammates<small>Optional</small></h4>
+        <div class="chips">${ppl.map(p => `<button type="button" class="chip" data-cp="${p}" aria-pressed="${flow.people.has(p)}">${face(p)}${esc(PEOPLE[p].name)}</button>`).join('')}</div></div>
+      <span class="auth-err" id="cErr" hidden>Give the workstream a name.</span>
+    </form>
+    <div class="flow-foot"><button class="btn ghost" id="cCancel" type="button">Cancel</button><button class="btn primary" id="cGo" type="button">Create workstream</button></div>`;
+    $('#cName').addEventListener('input', e => flow.name = e.target.value);
+    $('#cDesc').addEventListener('input', e => flow.desc = e.target.value);
+    box.querySelectorAll('[data-cs]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cs; flow.srcs.has(k) ? flow.srcs.delete(k) : flow.srcs.add(k); b.setAttribute('aria-pressed', flow.srcs.has(k)); }));
+    box.querySelectorAll('[data-cp]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cp; flow.people.has(k) ? flow.people.delete(k) : flow.people.add(k); b.setAttribute('aria-pressed', flow.people.has(k)); }));
+    $('#cCancel').addEventListener('click', closeFile);
+    $('#createForm').addEventListener('submit', e => { e.preventDefault(); createWs(); });
+    $('#cGo').addEventListener('click', createWs);
+    if (!flow.name) $('#cName').focus();
+  }
+  $('#flowX').addEventListener('click', closeFile);
+  box.querySelectorAll('[data-ft]').forEach(b => b.addEventListener('click', () => { flow.tab = b.dataset.ft; renderFlow(); }));
+}
+async function createWs() {
+  const name = flow.name.trim();
+  if (!name) { $('#cErr').hidden = false; $('#cName').focus(); return; }
+  const srcs = [...flow.srcs]; const people = [...flow.people];
+  const id = 'ws' + Date.now().toString(36);
+  const box = $('#flow');
+  const steps = [
+    `Reading ${srcs.map(k => src(k).label).join(', ') || 'your files'}`,
+    `Matching files about “${name}”`,
+    'Comparing the plan with 9 other workstreams',
+  ];
+  box.innerHTML = `<div class="flow-bar"><h2>Setting up ${esc(name)}</h2></div><div class="flow-main"><div class="trace" id="cTrace"></div></div>`;
+  for (const st of steps) {
+    $('#cTrace').insertAdjacentHTML('beforeend', `<div class="line run"><i><span class="spin"></span></i>${esc(st)}…</div>`);
+    await wait(750);
+    if (!$('#cTrace')) return;
+    const l = $('#cTrace').lastElementChild; l.classList.remove('run'); l.querySelector('i').textContent = '✓';
+  }
+  const w = { id, name, status: 'working', desc: flow.desc.trim() || 'New workstream. Add a description so Index can find related work.', team: ['me', ...people], watch: [] };
+  WS.push(w); wsBy[id] = w;
+  const slug = name.replace(/[^\w\s-]/g, '').trim();
+  const found = [
+    { id: id + 'f1', ws: id, kind: 'Brief', type: 'doc', title: `${slug} brief (draft)`, path: 'Drive / Drafts', owner: 'me', at: new Date(TODAY), key: 1, pinBy: 'me',
+      text: 'Index started this brief from your description. Add goals, owners and dates so other teams can see what you\'re shipping.',
+      body: [['Goals', 'Not written yet.'], ['Out of scope', 'Not written yet.']] },
+  ];
+  if (srcs.includes('desktop')) found.push({ id: id + 'f2', ws: id, kind: 'Notes', type: 'md', title: `${slug} notes.md`, path: '~/Desktop/', owner: 'me', at: ago(2), key: 2, pinBy: 'me',
+    text: 'Rough notes found on your Desktop that mention this project. Index pinned them so the team can find them.' });
+  if (srcs.includes('slack')) found.push({ id: id + 'f3', ws: id, kind: 'Thread', type: 'slack', title: `#${slug.toLowerCase().replace(/\s+/g, '-')}, kickoff`, path: 'Slack / kickoff', owner: people[0] || 'me', at: ago(1),
+    text: 'kicking this off this week. dropping links here as we go.' });
+  found.forEach(f => { FILES.push(f); fileBy[f.id] = f; });
+  (state.extraFeed[id] ||= []).unshift({ who: 'idx', text: `Index found ${found.length} file${found.length > 1 ? 's' : ''} and checked for overlaps. None yet.`, when: 'Just now' });
+  closeFile(); go('ws', { wsId: id });
+  toast(people.length ? `Created ${name} and invited ${people.map(first).join(', ')}` : `Created ${name}`);
+}
+
+// ---------- help ----------
+const HELP_FEATS = [
+  ['kb', 'A knowledge base built from your files', 'Index reads the files, PDFs, docs, sheets and Slack threads in the sources you allow, then keeps a private index of them so answers come back fast.', 'Review sources', () => go('settings', { settingsTab: 'sources' }),
+    '<path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>'],
+  ['perm', 'Permissions for data and files', 'Allow or block each folder and app. Index never opens a blocked source, and search results from it show no preview. People only see files they already have access to.', 'Open permissions', () => go('settings', { settingsTab: 'sources' }),
+    '<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>'],
+  ['ws', 'Projects and workstreams', 'Group work into workstreams. Mark the ones you are working on or watching, see who is on each team, and pin the key references everyone should read.', 'Create or join', () => { go('home'); openFlow('join'); },
+    '<rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/>'],
+  ['ov', 'Overlaps with other teams', 'Every day Index compares plans across workstreams and flags conflicts, such as two teams changing the same API. Start a thread with both owners, ask who decides, or dismiss it.', 'See overlaps', () => go('home'),
+    '<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>'],
+  ['search', 'Search with filters', 'Search files or ask a question in plain language. Filter results by file type and date. Filters apply to search only. Press / anywhere to jump to search.', 'Try a search', () => { $('#q').value = 'What did we decide about the permissions architecture?'; go('search', { query: $('#q').value, scope: null, tab: 'all' }); },
+    '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>'],
+  ['ask', 'Answers that ask for missing context', 'Index shows the files it read and cites each claim. When the files don\'t say, it asks the doc owner, or you, depending on your settings.', 'Ask a question', () => { $('#q').value = 'Is history sync on in incognito?'; go('search', { query: $('#q').value, scope: null, tab: 'all' }); },
+    '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/>'],
+  ['repair', 'Docs that repair themselves', 'When a decision changes, Index finds the docs that still say the old thing and suggests an exact edit. Nothing changes until you apply it or send it to the owner.', 'Review a fix', () => openFile('p2'),
+    '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/>'],
+  ['notif', 'Notifications', 'The bell collects questions from teammates, out-of-date docs and requests for context. Choose what reaches you in Settings.', 'Notification settings', () => go('settings', { settingsTab: 'notifications' }),
+    '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/>'],
+];
+const HELP_FAQ = [
+  ['Does Index change my files without asking?', 'No. Index suggests edits. A doc only changes when you or its owner applies the fix, and every change is logged in the workstream activity.'],
+  ['Who can see what Index reads?', 'Only people who already have access to a file can see it in Index. Blocking a source in Settings removes it from every search.'],
+  ['How does Index decide who to ask?', 'By default it asks the owner of the document that is missing the answer. You can switch this to only you, or turn questions off.'],
+  ['How fast are answers?', 'Most searches return in under a second because Index searches its own index rather than every source live. Answers that need a teammate\'s reply arrive in your notifications.'],
+];
+function renderHelp(el) {
+  const nav = [['start', 'Getting started'], ['features', 'Features'], ['faq', 'FAQ'], ['contact', 'Contact support']];
+  el.innerHTML = `<div class="col" style="gap:28px">
+    <div class="help-hero"><h1>Help center</h1><p>Index keeps cross-team knowledge current, so you can see what other teams are shipping and catch conflicts before they break your work.</p></div>
+    <div class="help">
+      <nav class="snav" aria-label="Help sections">${nav.map(([k, l], i) => `<button type="button" data-hs="${k}" aria-current="${i === 0}">${l}</button>`).join('')}</nav>
+      <div class="col" style="gap:36px">
+        <section id="h-start"><h2>Getting started</h2><div class="steps">
+          ${[['Connect sources', 'Choose which folders and apps Index can read. You can change this any time.'], ['Pick your workstreams', 'Join the work you own and watch the teams you depend on.'], ['Check overlaps', 'Review the conflicts Index finds and loop in the right people.']].map(([t, p], i) => `<div class="step"><span class="n">${i + 1}</span><b>${t}</b><p>${p}</p></div>`).join('')}
+        </div></section>
+        <section id="h-features"><h2>Features</h2><div class="feats">
+          ${HELP_FEATS.map(([k, t, p, cta, , ic]) => `<article class="feat" id="f-${k}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></span><h3>${t}</h3><p>${p}</p><button class="btn" type="button" data-try="${k}">${cta} →</button></article>`).join('')}
+        </div></section>
+        <section id="h-faq"><h2>FAQ</h2><div class="panel faq">${HELP_FAQ.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></section>
+        <section id="h-contact" class="panel"><div class="help-contact"><div><b style="font-weight:500">Still stuck?</b><p>Our team usually replies within one business day.</p></div><a class="btn" href="mailto:support@index.app" data-dead style="text-decoration:none">Contact support</a></div></section>
+      </div>
+    </div></div>`;
+  el.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => HELP_FEATS.find(f => f[0] === b.dataset.try)[4]()));
+  el.querySelectorAll('[data-hs]').forEach(b => b.addEventListener('click', () => {
+    el.querySelectorAll('[data-hs]').forEach(x => x.setAttribute('aria-current', x === b));
+    $('#h-' + b.dataset.hs).scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  }));
+}
+
+// ---------- settings ----------
+function renderSettings(el) {
+  const t = state.settingsTab;
+  const sw = (key, on) => `<button class="switch" type="button" role="switch" data-sw="${key}" aria-checked="${on}" aria-label="${key}"></button>`;
+  const sections = {
+    profile: `<section class="panel"><div class="profile"><img src="people/me.jpg" alt=""><div><b>You</b><small>${esc(PEOPLE.me.role)} · working on ${WS.filter(w => w.team.includes('me')).length} workstreams, watching ${WS.filter(w => w.watch.includes('me')).length}</small></div></div>
+      <div class="srow"><div><b>Role</b><small>Shown to teammates when Index routes a question to you</small></div><input class="field" id="roleIn" value="${esc(PEOPLE.me.role)}"></div>
+      <div class="srow"><div><b>Answer questions about</b><small>Index sends you questions on these topics first</small></div><span class="pill">Permissions</span></div></section>`,
+    sources: `<section class="panel">${SOURCES.map(s => `<div class="srow"><div><b>${esc(s.label)}</b><span class="mono">${esc(s.path)} · ${s.items} items</span></div>
+      <div class="seg" data-s="${s.id}">${['allow','block'].map(v => `<button type="button" data-v="${v}" aria-pressed="${s.mode === v}">${v === 'allow' ? 'Allow' : 'Block'}</button>`).join('')}</div></div>`).join('')}</section>`,
+    notifications: `<section class="panel">
+      <div class="srow"><div><b>Questions from teammates</b><small>When someone asks you something through Index</small></div>${sw('questions', state.notify.questions)}</div>
+      <div class="srow"><div><b>Out-of-date docs, workstreams I'm working on</b><small>Index suggests a fix you can apply</small></div>${sw('staleWorking', state.notify.staleWorking)}</div>
+      <div class="srow"><div><b>Out-of-date docs, workstreams I'm watching</b><small>Usually the owners handle these</small></div>${sw('staleWatching', state.notify.staleWatching)}</div></section>`,
+    context: `<section class="panel">
+      <div class="srow"><div><b>When files don't answer a question</b><small>Who Index asks for the missing context</small></div>
+        <div class="seg" id="askPolicy">${[['owner','The doc owner'],['me','Only me'],['block','Never ask']].map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${state.askPolicy === (v === 'block' ? 'never' : v)}">${l}</button>`).join('')}</div></div>
+      <div class="srow"><div><b>Draft replies for me</b><small>Index writes a first draft from pinned files when a teammate asks you something</small></div>${sw('draft', state.draftReplies)}</div></section>`,
+  };
+  el.innerHTML = `<div class="col" style="gap:22px">
+    <button class="back" id="back" type="button">← Back to workstreams</button>
+    <div class="q-head"><h1>Settings</h1></div>
+    <div class="settings">
+      <nav class="snav" aria-label="Settings sections">${SETTINGS_TABS.map(([k, l]) => `<button type="button" data-st="${k}" aria-current="${k === t}">${l}</button>`).join('')}</nav>
+      <div class="col"><div class="q-head" style="margin-top:-6px"><h3 style="margin:0;font-size:17px;font-weight:500">${SETTINGS_TABS.find(x => x[0] === t)[1]}</h3>
+        ${t === 'sources' ? '<div class="scope">Index only opens what you allow. Blocked locations are skipped in every search.</div>' : ''}</div>${sections[t]}</div>
+    </div></div>`;
+  $('#back').addEventListener('click', () => go('home'));
+  el.querySelectorAll('.snav [data-st]').forEach(b => b.addEventListener('click', () => { state.settingsTab = b.dataset.st; renderSettings(el); }));
+  el.querySelectorAll('.seg[data-s] button').forEach(b => b.addEventListener('click', () => { const s = src(b.parentElement.dataset.s); s.mode = b.dataset.v; renderSettings(el); toast(`${s.label}: ${b.textContent}`); }));
+  el.querySelectorAll('#askPolicy button').forEach(b => b.addEventListener('click', () => { state.askPolicy = b.dataset.v === 'block' ? 'never' : b.dataset.v; renderSettings(el); }));
+  el.querySelectorAll('[data-sw]').forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.sw; if (k === 'draft') state.draftReplies = !state.draftReplies; else state.notify[k] = !state.notify[k]; renderSettings(el);
+  }));
+  if ($('#roleIn')) $('#roleIn').addEventListener('change', e => { PEOPLE.me.role = e.target.value || 'Product manager'; toast('Role updated'); });
+}
+
+function render() {
+  const el = $('#view');
+  document.body.classList.toggle('auth', state.view === 'login');
+  updateBell();
+  updateFilterBadge();
+  if (state.view !== 'search') runId++;
+  ({ login: renderLogin, help: renderHelp, home: renderHome, ws: renderWs, search: renderSearch, settings: renderSettings })[state.view](el);
+  if (state.view === 'ws') el.querySelectorAll('.results [data-goto]').forEach(b => b.addEventListener('click', () => go('ws', { wsId: b.dataset.goto })));
+}
+render();
+</script>
+</body>
+</html>
